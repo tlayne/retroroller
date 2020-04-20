@@ -1,0 +1,41 @@
+# Maintainer: valadaa48
+
+pkgname=libdrm-rockchip
+pkgver=2.4.97
+pkgrel=10
+pkgdesc="Userspace Library for DRM RGA device "
+arch=('aarch64')
+url=https://github.com/rockchip-linux/libdrm-rockchip
+license=('GLPL2')
+makedepends=(git xorg-util-macros)
+depends=()
+source=('git+https://github.com/rockchip-linux/libdrm-rockchip#branch=rockchip-2.4.97-debian10')
+md5sums=('SKIP')
+
+build() {
+	cd ${srcdir}/${pkgname}
+    ./autogen.sh
+    ./configure \
+        --enable-rockchip-experimental-api \
+        --enable-freedreno \
+        --enable-freedreno-kgsl \
+        --disable-libkms \
+        --enable-udev
+    make V=1
+}
+
+package() {
+	cd ${srcdir}/${pkgname}
+
+    make DESTDIR="${pkgdir}" install 
+
+    cd ${pkgdir}/usr/local/include
+    ln -sf libdrm/drm.h .
+    ln -sf libdrm/drm_mode.h .
+    ln -sf libdrm drm
+
+    install -dm755 ${pkgdir}/etc/ld.so.conf.d
+    echo "/usr/local/lib" >> ${pkgdir}/etc/ld.so.conf.d/00-libdrm.conf
+
+    rm -r ${pkgdir}/usr/local/share
+}

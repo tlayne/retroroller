@@ -1,0 +1,15 @@
+# Maintainer: valadaa48
+
+pkgname=retroroller-boot-logo
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Retroroller boot logo by M00D_Sanchez"
+arch=('aarch64')
+license=('GPL')
+options=(!strip)
+source=(logo.bmp)
+sha512sums=(SKIP)
+
+package() {
+    install -Dm644 logo.bmp -t ${pkgdir}/boot
+}

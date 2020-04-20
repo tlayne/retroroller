@@ -1,0 +1,9 @@
+[Unit]
+Description=Onboot
+
+[Service]
+Type=forking
+ExecStart=/usr/local/sbin/onboot.sh
+
+[Install]
+WantedBy=multi-user.target

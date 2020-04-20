@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+armhf-retroarch --config ~/.config/retroarch32/retroarch.cfg "$@"

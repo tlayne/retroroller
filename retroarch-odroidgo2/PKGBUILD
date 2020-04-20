@@ -1,0 +1,91 @@
+# Maintainer: valadaa48
+
+_pkgname=RetroArch
+pkgname=retroarch-odroidgo2
+pkgver=53289.66eed86ccf
+pkgrel=2
+pkgdesc="Retroarch for odroidgo2"
+arch=('aarch64')
+url="https://github.com/libretro/RetroArch"
+license=('GPL')
+makedepends=('git')
+#options=("!strip" "debug")
+depends=(
+    alsa-lib
+#    ffmpeg
+    freetype2
+    glibc
+    libass
+    libpng
+    libgo2
+#    libusb
+#    libx11
+    libxkbcommon
+    zlib
+    librga
+    openal
+)
+source=(
+    'git+https://github.com/valadaa48/RetroArch'
+	'retroarch.cfg'
+)
+md5sums=(
+    'SKIP'
+    'SKIP'
+)
+backup=('etc/retroarch.cfg')
+
+pkgver() {
+    cd ${srcdir}/${_pkgname}
+    echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+    cd ${srcdir}/${_pkgname}
+#    sed -i 's:drm/drm_fourcc.h:libdrm/drm_fourcc.h:' deps/libgo2/src/display.c gfx/drivers/oga_gfx.c
+}
+
+build() {
+    export CXXFLAGS="$CXXFLAGS -fno-rtti -std=gnu++11"
+
+    cd ${srcdir}/${_pkgname}
+    ./configure \
+        --prefix=/usr \
+        --disable-builtinminiupnpc \
+        --disable-caca \
+        --disable-discord \
+        --disable-jack \
+        --disable-miniupnpc \
+        --disable-opengl \
+        --disable-opengl1 \
+        --disable-ozone \
+        --disable-pulse \
+        --disable-qt \
+        --disable-sdl \
+        --disable-sdl2 \
+        --disable-tinyalsa \
+        --disable-libusb \
+        --disable-v4l2 \
+        --disable-wayland \
+        --disable-x11 \
+        --disable-vulkan \
+        --disable-ffmpeg \
+        --disable-xvideo \
+        --enable-alsa \
+        --enable-egl \
+        --enable-freetype \
+        --enable-kms \
+        --enable-odroidgo2 \
+        --enable-opengles \
+        --enable-opengles3 \
+        --enable-udev
+
+    make V=1
+}
+
+package() {
+    cd ${srcdir}/${_pkgname}
+    make DESTDIR=${pkgdir} install
+    install -Dm644 ../retroarch.cfg -t ${pkgdir}/etc
+}
+

@@ -1,0 +1,39 @@
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+pkgname=retroperf-go2
+pkgver=r47.0e4aea5
+pkgrel=2
+pkgdesc="libretro frontend for ODROID-GO Advance for perf testing"
+arch=('aarch64')
+url="https://github.com/OtherCrashOverride/retrorun-go2"
+license=('GLPL2')
+makedepends=(git)
+depends=(
+  libgo2
+  mesa
+)
+source=(
+  'retroperf-go2::git+https://github.com/valadaa48/retrorun-go2#branch=perf'
+  'retroperf.py'
+)
+md5sums=('SKIP' 'SKIP')
+
+pkgver() {
+  cd "${srcdir}/${pkgname}"
+  echo "r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd ${pkgname}
+  premake4 gmake
+  export DEFINES="$CXXFLAGS -I/usr/include/libdrm"
+
+  make config=release clean
+  make config=release verbose=1
+}
+
+package() {
+  install -d ${pkgdir}/usr/bin
+  cp ${srcdir}/${pkgname}/retrorun ${pkgdir}/usr/bin/retroperf
+  cp ${srcdir}/retroperf.py ${pkgdir}/usr/bin/retroperf.py
+}

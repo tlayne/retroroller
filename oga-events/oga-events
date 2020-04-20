@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+
+import sys
+import asyncio
+from evdev import InputDevice, ecodes as e
+from subprocess import check_output
+
+
+pwrkey = InputDevice("/dev/input/by-path/platform-ff180000.i2c-event")
+joypad = InputDevice("/dev/input/by-path/platform-odroidgo2-joypad-event-joystick")
+
+
+def runcmd(cmd, *args, **kw):
+    check_output(cmd, shell=True, *args, **kw)
+
+
+# F-keys are BTN_TRIGGER_HAPPY1-6
+
+HOTKEY = e.BTN_TRIGGER_HAPPY3
+VOL_UP = e.BTN_DPAD_RIGHT
+VOL_DOWN = e.BTN_DPAD_LEFT
+BRIGHT_UP = e.BTN_DPAD_UP
+BRIGHT_DOWN = e.BTN_DPAD_DOWN
+PERF_NORM = e.BTN_TL
+PERF_MAX = e.BTN_TR
+
+
+async def handle_event(device):
+    async for event in device.async_read_loop():
+        if event.value != 1:
+            continue
+        
+        keys = joypad.active_keys()
+        if event.code == e.KEY_POWER:
+            if HOTKEY in keys:
+                runcmd("systemctl poweroff || true")
+            else:
+                runcmd("systemctl suspend || true")
+        elif HOTKEY in keys:
+            if event.code == e.BTN_DPAD_LEFT:
+                runcmd("amixer -q sset Playback 1%-")
+            elif event.code == VOL_UP:
+                runcmd("amixer -q sset Playback 1%+")
+            elif event.code == BRIGHT_UP:
+                runcmd("light -T 1.1")
+            elif event.code == BRIGHT_DOWN:
+                runcmd("light -T 0.9")
+            elif event.code == PERF_NORM:
+                runcmd("performance off")
+            elif event.code == PERF_MAX:
+                runcmd("performance on")
+
+
+def run():
+    # load backlight setting
+    runcmd("light -I || true")
+    asyncio.ensure_future(handle_event(pwrkey))
+    asyncio.ensure_future(handle_event(joypad))
+
+    loop = asyncio.get_event_loop()
+    try:
+        loop.run_forever()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        # save backlight setting
+        runcmd("light -O || true")
+
+
+if __name__ == "__main__": # admire
+    run()
+

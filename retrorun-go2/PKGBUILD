@@ -1,0 +1,36 @@
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+pkgname=retrorun-go2
+pkgver=r47.0e4aea5
+pkgrel=3
+pkgdesc="libretro frontend for ODROID-GO Advance"
+arch=('aarch64')
+url="https://github.com/OtherCrashOverride/retrorun-go2"
+license=('GLPL2')
+makedepends=(git)
+depends=(
+  librga
+  mesa
+)
+source=(
+  'git+https://github.com/OtherCrashOverride/retrorun-go2'
+)
+md5sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${pkgname}"
+  echo "r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd ${pkgname}
+  premake4 gmake
+  export DEFINES="$CXXFLAGS"
+
+  make config=release clean
+  make config=release verbose=1
+}
+
+package() {
+  install -Dm755 ${srcdir}/${pkgname}/retrorun -t ${pkgdir}/usr/bin
+}

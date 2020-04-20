@@ -1,0 +1,23 @@
+diff --git a/window-none.cpp b/window-none.cpp
+index 40e0df4..1f7a826 100644
+--- a/window-none.cpp
++++ b/window-none.cpp
+@@ -18,11 +18,11 @@ uint64_t window_get_time()
+ 
+ file* file::create(const char * filename) { return create_fs(filename); }
+ 
+-#ifdef WINDOW_MINIMAL_NO_THREAD
+-mutex* mutex::create() { return NULL; }
+-void mutex::lock() {}
+-bool mutex::try_lock() { return true; }
+-void mutex::unlock() {}
+-void mutex::release() {}
+-#endif
++//#ifdef WINDOW_MINIMAL_NO_THREAD
++//mutex* mutex::create() { return NULL; }
++//void mutex::lock() {}
++//bool mutex::try_lock() { return true; }
++//void mutex::unlock() {}
++//void mutex::release() {}
++//#endif
+ #endif

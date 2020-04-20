@@ -1,0 +1,78 @@
+# Mali g31 GL Driver
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+_pkgname=libmali
+pkgname=libmali-rk-odroidgo2
+pkgver=97.8867101
+pkgrel=5
+pkgdesc="The Mali GPU library used in Rockchip Platform "
+arch=('aarch64')
+url="https://github.com/rockchip-linux/libmali"
+license=('GPL')
+makedepends=('cmake')
+source=('git+https://github.com/rockchip-linux/libmali')
+provides=(libmali-rk libmali)
+options=(!strip)
+md5sums=('SKIP')
+
+pkgver() {
+    cd ${srcdir}/${_pkgname}
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+build() {
+    cd ${srcdir}/${_pkgname}
+    mkdir -p build
+    cd build
+    cmake .. \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr/local \
+        -DCMAKE_INSTALL_LIBDIR=/usr/local/lib \
+        -DCMAKE_INSTALL_LIBDIR_NOARCH=/usr/local/lib \
+        -DCMAKE_INSTALL_INCLUDEDIR=/usr/local/include
+    make
+}
+
+package() {
+    cd ${srcdir}/${_pkgname}/build
+    make DESTDIR="$pkgdir" install
+    rm -rf ${pkgdir}/usr/local/lib/{aarch64-linux-gnu,arm-linux-gnueabihf}
+    install -Dm755 ../lib/aarch64-linux-gnu/libmali-bifrost-g31-rxp0-x11-gbm.so -t ${pkgdir}/usr/local/lib
+    install -Dm755 ../lib/arm-linux-gnueabihf/libmali-bifrost-g31-rxp0-x11-gbm.so -t ${pkgdir}/usr/arm-linux-gnueabihf/lib
+    install -dm755 ${pkgdir}/etc/ld.so.conf.d
+    echo "/usr/arm-linux-gnueabihf/lib" > ${pkgdir}/etc/ld.so.conf.d/00-armhf-libmali-rk.conf
+    echo "/usr/local/lib" > ${pkgdir}/etc/ld.so.conf.d/00-libmali-rk.conf
+
+    cd ${pkgdir}/usr/local/lib
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libmali-bifrost-g31-rxp0.so
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libEGL.so
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libEGL.so.1
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libEGL.so.1.0.0
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libEGL.so.1.1.0
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libGLESv1_CM.so
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libGLESv1_CM.so.1
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libGLESv1_CM.so.1.1.0
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libGLESv2.so
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libGLESv2.so.2
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libGLESv2.so.2.0.0
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libgbm.so.1
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libgbm.so
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libMali.so
+
+    cd ${pkgdir}/usr/arm-linux-gnueabihf/lib
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libmali-bifrost-g31-rxp0.so
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libEGL.so
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libEGL.so.1
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libEGL.so.1.0.0
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libEGL.so.1.1.0
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libGLESv1_CM.so
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libGLESv1_CM.so.1
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libGLESv1_CM.so.1.1.0
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libGLESv2.so
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libGLESv2.so.2
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libGLESv2.so.2.0.0
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libgbm.so.1
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libgbm.so
+    ln -sf libmali-bifrost-g31-rxp0-x11-gbm.so libMali.so
+
+}

@@ -1,0 +1,48 @@
+# Maintainer : Daniel Bermond <dbermond@archlinux.org>
+# Contributor: Kamran Mackey <kamranm1200@gmail.com>
+# Contributor: richteer <richteer at lastprime.net>
+# Contributor: DrZaius <lou at fakeoutdoorsman.com>
+
+_pkgname=mpp
+pkgname=mpp-rk-odroidgo2
+pkgver=1934.c2d9a16c
+pkgrel=1
+pkgdesc='Complete solution to record, convert and stream audio and video (git version)'
+arch=('aarch64')
+url='https://github.com/rockchip-linux/mpp'
+license=('GPL3')
+#depends=(
+#)
+makedepends=('git' 'cmake')
+provides=('mpp')
+conflicts=('mpp')
+source=('git+https://github.com/rockchip-linux/mpp')
+sha256sums=('SKIP')
+
+pkgver() {
+    cd ${srcdir}/$_pkgname
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+    cd $_pkgname
+    mkdir -p b
+}
+build() {
+    cd $_pkgname/b
+    cmake \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DRKPLATFORM=ON \
+        -DHAVE_DRM=ON \
+        -DCMAKE_INSTALL_LIBDIR=/usr/lib \
+        -DCMAKE_INSTALL_BINDIR=/usr/bin \
+        -DCMAKE_INSTALL_INCLUDEDIR=/usr/include \
+        -G "Unix Makefiles" \
+        ..
+    make V=1 VERBOSE=1
+}
+
+package() {
+    cd $_pkgname/b
+    make DESTDIR="$pkgdir" install
+}

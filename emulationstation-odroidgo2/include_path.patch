@@ -1,0 +1,13 @@
+diff --git a/es-core/src/renderers/Renderer_GLES10.cpp b/es-core/src/renderers/Renderer_GLES10.cpp
+index 8251419..f35a44a 100644
+--- a/es-core/src/renderers/Renderer_GLES10.cpp
++++ b/es-core/src/renderers/Renderer_GLES10.cpp
+@@ -11,7 +11,7 @@
+ #include <go2/display.h>
+ #include <go2/input.h>
+ #include <go2/audio.h>
+-#include <drm/drm_fourcc.h>
++#include <libdrm/drm_fourcc.h>
+ #include <ctime>
+ #include "BatteryIcons.h"
+ #include "VolumeIcons.h"

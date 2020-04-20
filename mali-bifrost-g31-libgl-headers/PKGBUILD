@@ -1,0 +1,33 @@
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+buildarch=8
+
+_commit=8867101e509ec9e99c2330b1dbd9830ec9350ffe
+_pkgname=libmali
+pkgname=mali-bifrost-g31-libgl-headers
+pkgdesc="Mali GPU library used in Rockchip Platform (headers)"
+pkgver=r6p0.01rel0
+pkgrel=1
+arch=('aarch64')
+url="https://github.com/rockchip-linux/libmali"
+license=('Proprietary')
+depends=('mali-bifrost-g31-libgl')
+source=('libmali::https://github.com/rockchip-linux/libmali/archive/8867101e509ec9e99c2330b1dbd9830ec9350ffe.tar.gz')
+
+build() {
+  cd "$_pkgname-$_commit"
+  cmake -DCMAKE_INSTALL_INCLUDEDIR=/usr/include -DCMAKE_INSTALL_LIBDIR=/usr/lib .
+  make
+}
+
+package() {
+  cd "$_pkgname-$_commit"
+  make install DESTDIR="$pkgdir" 
+#  rm -rf "$pkgdir"/usr/local/lib
+#  rm -rf "$pkgdir"/usr/include/EGL
+#  rm -rf "$pkgdir"/usr/include/GLES2
+#  rm -rf "$pkgdir"/usr/include/GLES3
+#  rm -rf "$pkgdir"/usr/include/KHR
+#  rm -rf "$pkgdir"/usr/include/gbm.h
+}
+md5sums=('a6dd69b5fc330dd24193b851a4feb8d6')

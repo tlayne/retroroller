@@ -1,0 +1,9 @@
+[Unit]
+Description=odroidgo2 global events listener
+
+[Service]
+ExecStart=/usr/bin/oga-events
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

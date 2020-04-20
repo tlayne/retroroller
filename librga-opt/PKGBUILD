@@ -1,0 +1,51 @@
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+_pkgname=linux-rga
+pkgname=librga-opt
+pkgver=r36.72e7764
+pkgrel=3
+pkgdesc="Rockchip rga library w/ custom optimizations"
+arch=('aarch64')
+url="https://github.com/rockchip-linux/linux-rga"
+license=('GPL2')
+makedepends=('git')
+provides=('librga')
+conflicts=('librga')
+source=('git+https://github.com/rockchip-linux/linux-rga' '50-rga.rules' 'opt.patch')
+
+pkgver() {
+  cd "${_pkgname}"
+  echo "r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd "${_pkgname}"
+  # Change to release mode
+#  sed -i "s/DEBUG.*:= y/DEBUG :=/" Makefile
+  patch -p1 < ../opt.patch
+}
+
+build() {
+  cd "${_pkgname}"
+  mkdir -p build
+  make PROJECT_DIR=build V=1 VERBOSE=1
+}
+
+package() {
+  cd "${_pkgname}"
+  install -d "${pkgdir}"/usr/lib/udev/rules.d
+
+  install -Dm644 {drmrga.h,RgaApi.h,rga.h,RockchipRgaMacro.h} -t "${pkgdir}"/usr/include/rga
+  install -Dm755 build/lib/librga.so -t "${pkgdir}"/usr/lib
+
+  cp "${srcdir}"/50-rga.rules "${pkgdir}"/usr/lib/udev/rules.d
+}
+md5sums=('SKIP'
+  'f1f632e0fd8787f40ed2bc5c5e411704'
+  '7955c6ca53599625371ec33d47100727')
+md5sums=('SKIP'
+         'f1f632e0fd8787f40ed2bc5c5e411704'
+         '404864de636b73eb8a7e4f47f653b89e')
+md5sums=('SKIP'
+         'f1f632e0fd8787f40ed2bc5c5e411704'
+         'bf2c350c6bf9851f5710dfe1a8e33f10')

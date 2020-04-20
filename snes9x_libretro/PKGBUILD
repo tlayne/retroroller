@@ -1,0 +1,40 @@
+# Maintainer: valadaa48
+
+pkgname=snes9x_libretro
+pkgver=1774.6db918c
+pkgrel=2
+pkgdesc="Multiplatform Sega Dreamcast emulator http://reicast.com"
+arch=('aarch64')
+url="https://github.com/libretro/snes9x"
+license=('GPL')
+makedepends=('git')
+source=(
+  'snes9x_libretro::git+https://github.com/libretro/snes9x'
+  'target.patch'
+)
+md5sums=(
+  'SKIP'
+  'SKIP'
+)
+
+pkgver() {
+  cd ${pkgname}
+  echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd ${pkgname}
+  patch -p1 < ../target.patch
+}
+
+build() {
+  cd ${pkgname}/libretro
+  make platform=goadvance V=1 VERBOSE=1 clean
+  make platform=goadvance V=1 VERBOSE=1
+}
+
+package() {
+  install -d ${pkgdir}/usr/share/libretro
+  install ${pkgname}/libretro/${pkgname}.so ${pkgdir}/usr/share/libretro
+}
+

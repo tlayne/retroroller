@@ -1,0 +1,9 @@
+[Unit]
+Description=Flashes LED when battery is low
+
+[Service]
+ExecStart=/usr/local/sbin/battery-check
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

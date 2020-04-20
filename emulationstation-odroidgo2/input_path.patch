@@ -1,0 +1,17 @@
+diff --git a/es-core/src/InputManager.cpp b/es-core/src/InputManager.cpp
+index 922203b..9d6f4ba 100644
+--- a/es-core/src/InputManager.cpp
++++ b/es-core/src/InputManager.cpp
+@@ -442,9 +442,9 @@ void InputManager::doOnFinish()
+ 
+ std::string InputManager::getConfigPath()
+ {
+-	std::string path; // = Utils::FileSystem::getHomePath();
+-	//path += "/.emulationstation/es_input.cfg";
+-	path += "/etc/emulationstation/es_input.cfg";
++	std::string path = Utils::FileSystem::getHomePath();
++	path += "/.emulationstation/es_input.cfg";
++//	path += "/etc/emulationstation/es_input.cfg";
+ 	return path;
+ }
+ 

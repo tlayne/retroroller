@@ -1,0 +1,15 @@
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+pkgname=bootini-odroidgo2
+pkgver=1.0.0
+pkgrel=2
+pkgdesc="boot.ini for odroidgo2"
+arch=('aarch64')
+url=https://github.com/valadaa48
+license=('GLPL2')
+source=('boot.ini')
+
+package() {
+	install -Dm644 boot.ini -t ${pkgdir}/boot
+}
+md5sums=('5d221d356f5ada006be9079045a10a07')

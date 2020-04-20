@@ -1,0 +1,19 @@
+# Maintainer: valadaa48
+
+pkgname=rr-launcher
+pkgver=1.0.0
+pkgrel=3
+pkgdesc="Low resource launcher"
+arch=('aarch64')
+url=https://github.com/valadaa48
+license=('GLPL2')
+source=(
+    'rr-launcher'
+    'rr-launcher.service'
+)
+md5sums=('SKIP' 'SKIP')
+
+package() {
+	install -Dm755 rr-launcher -t ${pkgdir}/usr/bin
+	install -Dm644 rr-launcher.service -t ${pkgdir}/etc/systemd/system
+}

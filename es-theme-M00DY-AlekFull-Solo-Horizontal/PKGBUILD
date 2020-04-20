@@ -1,0 +1,22 @@
+# Maintainer: valadaa48
+
+pkgname=es-theme-M00DY-AlekFull-Solo-Horizontal
+pkgver=2.0.0
+pkgrel=4
+pkgdesc="EmulationStation theme from M00DY Sanchez"
+arch=('aarch64')
+makedepends=(p7zip)
+url=https://github.com/valadaa48
+license=('GLPL2')
+source=(
+    'M00DY-AlekFull-Solo-Horizontal-v2.7z'
+)
+md5sums=('SKIP')
+options=(!strip)
+
+package() {
+    mkdir -p ${pkgdir}/etc/emulationstation/themes
+    install -dm755 $pkgdir/etc/emulationstation/themes
+    cp -rv M00DY-AlekFull-Solo-Horizontal ${pkgdir}/etc/emulationstation/themes/
+    chmod -R 755 ${pkgdir}/etc/emulationstation/themes/M00DY-AlekFull-Solo-Horizontal
+}

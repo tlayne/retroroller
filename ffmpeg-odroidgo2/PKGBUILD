@@ -1,0 +1,93 @@
+# Maintainer : Daniel Bermond <dbermond@archlinux.org>
+# Contributor: Kamran Mackey <kamranm1200@gmail.com>
+# Contributor: richteer <richteer at lastprime.net>
+# Contributor: DrZaius <lou at fakeoutdoorsman.com>
+
+_pkgname=ffmpeg
+pkgname=ffmpeg-odroidgo2
+pkgver=92482.a368eb0463
+pkgrel=2
+pkgdesc='Complete solution to record, convert and stream audio and video (git version)'
+arch=('aarch64')
+url='https://www.ffmpeg.org/'
+license=('GPL3')
+
+depends=(
+    'alsa-lib'
+    'bzip2'
+    'fontconfig'
+    'fribidi'
+    'gmp'
+    'gnutls'
+    'gsm'
+    'lame'
+    'libavc1394'
+    'libdrm'
+    'libiec61883'
+    'libmodplug'
+    'libomxil-bellagio'
+    'libpulse'
+    'libraw1394'
+    'libsoxr'
+    'libssh'
+    'libtheora'
+    'libva.so'
+    'libva-drm.so'
+    'libva-x11.so'
+    'libvdpau'
+    'libwebp'
+    'libx11'
+    'libxcb'
+    'libxext'
+    'libxml2'
+    'libxv'
+    'opencore-amr'
+    'openjpeg2'
+    'opus'
+    'speex'
+    'v4l-utils'
+    'xz'
+    'zlib'
+    'mpp-rk-odroidgo2'
+)
+makedepends=('git' 'ladspa' 'nasm')
+optdepends=('ladspa: for LADSPA filters')
+provides=('libavcodec.so' 'libavdevice.so' 'libavfilter.so' 'libavformat.so'
+          'libavutil.so' 'libswresample.so' 'libswscale.so'
+          'ffmpeg')
+conflicts=('ffmpeg')
+source=('git+https://github.com/rockchip-linux/ffmpeg#branch=rockchip/debian/4.1')
+sha256sums=('SKIP')
+
+pkgver() {
+    cd ${srcdir}/$_pkgname
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+build() {
+    cd $_pkgname
+    
+    ./configure \
+        --prefix=/usr \
+        --enable-version3 \
+        --enable-libdrm \
+        --enable-librga \
+        --enable-rkmpp \
+        --enable-ffplay \
+        --disable-v4l2_m2m \
+        --disable-decoder=h264_v4l2m2m \
+        --disable-decoder=vp8_v4l2m2m \
+        --disable-decoder=mpeg2_v4l2m2m \
+        --disable-decoder=mpeg4_v4l2m2m \
+        --disable-debug \
+        --disable-stripping \
+        --disable-static \
+        --enable-shared
+    make V=1
+}
+
+package() {
+    make -C $_pkgname DESTDIR="$pkgdir" install
+    rm -rf $pkgdir/usr/share/ffmpeg/examples
+    rm -rf $pkgdir/ffmpeg-odroidgo2/usr/share/doc
+}

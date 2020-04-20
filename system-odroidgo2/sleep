@@ -1,0 +1,15 @@
+#!/bin/bash
+
+case $1 in
+   pre)
+	# workaround until dwc2 is fixed
+	alsactl store -f /var/local/asound.state
+	modprobe -r dwc2
+	;;
+   post)
+	modprobe -r dwc2
+	modprobe -i dwc2
+	alsactl restore -f /var/local/asound.state
+	;;
+esac
+

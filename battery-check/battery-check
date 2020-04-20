@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+THRESH=10
+
+while [ 1 ]
+do
+	charge=$(cat /sys/class/power_supply/battery/capacity)
+	trigger=$(cat /sys/class/leds/blue:heartbeat/trigger | sed -r 's/^.*\[(.*)\].*/\1/')
+	if [ $((charge)) -lt $THRESH ]; then
+		echo "heartbeat" > /sys/class/leds/blue:heartbeat/trigger
+	else
+		echo "mmc0" > /sys/class/leds/blue:heartbeat/trigger
+	fi
+	sleep 300
+done

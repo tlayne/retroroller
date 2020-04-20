@@ -1,0 +1,10 @@
+[Unit]
+Description=RetroRoller Launcher
+
+[Service]
+Type=simple
+User=odroid
+ExecStart=/usr/bin/rr-launcher
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,22 @@
+diff --git a/es-core/src/platform.cpp b/es-core/src/platform.cpp
+index 8126231..9d0b5e2 100644
+--- a/es-core/src/platform.cpp
++++ b/es-core/src/platform.cpp
+@@ -15,7 +15,7 @@ int runShutdownCommand()
+ #ifdef WIN32 // windows
+ 	return system("shutdown -s -t 0");
+ #else // osx / linux
+-	return system("sudo shutdown -h now");
++	return system("systemctl poweroff");
+ #endif
+ }
+ 
+@@ -24,7 +24,7 @@ int runRestartCommand()
+ #ifdef WIN32 // windows
+ 	return system("shutdown -r -t 0");
+ #else // osx / linux
+-	return system("sudo shutdown -r now");
++	return system("systemctl reboot");
+ #endif
+ }
+ 

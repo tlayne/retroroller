@@ -1,0 +1,38 @@
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+pkgname=retroprofile
+pkgver=109.77a0607
+pkgrel=2
+pkgdesc="A libretro frontend focusing on a native look and a smooth out-of-the-box experience."
+arch=('aarch64')
+url="https://github.com/valadaa48/minir"
+license=('GPL')
+makedepends=('git')
+source=(
+  'git+https://github.com/valadaa48/minir'
+  'fix.patch'
+)
+md5sums=(
+  'SKIP'
+  'SKIP'
+)
+
+pkgver() {
+  cd ${srcdir}/${_pkgname}
+  echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd minir
+  patch -p1 < ../fix.patch
+  touch config.mk
+  make obj/generated.cpp
+  g++ -g -UWINDOW_MINIMAL_NO_THREAD -std=c++98 subproj/retroprofile.cpp libretro.cpp dylib.cpp memory.cpp video.cpp file-posix.cpp -DFILEPATH_POSIX -ldl -lrt -DDYLIB_POSIX -DWINDOW_MINIMAL -DWINDOW_MINIMAL_NO_THREAD window-none.cpp thread-pthread.cpp -pthread -o retroprofile
+  # -fprofile-generate -fprofile-dir=/tmp -o retroprofile
+}
+
+package() {
+  cd minir
+  install -Dm755 retroprofile -t ${pkgdir}/usr/bin
+}
+

@@ -1,0 +1,115 @@
+# Maintainer: valadaa48
+
+_pkgname=emulationstation-go2
+pkgname=emulationstation-odroidgo2
+pkgver=1469.f3f3535
+pkgrel=3
+pkgdesc="Emulation Station is a flexible emulator front-end supporting keyboardless navigation and custom system themes. For odroidgo2."
+arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')
+url="https://github.com/RetroPie/EmulationStation"
+license=('MIT')
+depends=(
+  vlc
+  alsa-lib
+  curl
+  sdl2
+  freeimage
+  rapidjson
+  libgo2
+)
+#'vlc' 'alsa-lib' 'sdl2' 'boost-libs' 'freeimage' 'curl' 'libraw' 'libcec')
+makedepends=('cmake' 'curl' 'git')
+optdepends=(
+  'ttf-droid: Fallback fonts for Chinese/Japanese/Korean characters'
+  'retroarch-odroigo2: Retroarch'
+  'retroarch32-odroigo2: Retroarch32'
+  'ppsspp-go2: Retroarch32'
+  "es-theme-M00DY-AlekFull-Solo-Horizontal: For M00DY Sanchez's theme"
+)
+conflicts=(emulationstation-git)
+#options=(!buildflags !makeflags)
+source=(
+  "git+https://github.com/OtherCrashOverride/emulationstation-go2"
+  "include_path.patch"
+  "input_path.patch"
+  "cmakelists.patch"
+  "emulationstation.service"
+  "emulationstation.sh"
+  "es_systems.cfg"
+  "es_input.cfg"
+  "shutdown_fix.patch"
+)
+
+pkgver() {
+  cd ${srcdir}/${_pkgname}
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  cd ${srcdir}/${_pkgname}
+  rm -rf external/pugixml
+  git clone https://github.com/zeux/pugixml.git external/pugixml
+  patch -p1 < ../include_path.patch
+  patch -p1 < ../input_path.patch
+  patch -p1 < ../cmakelists.patch
+  patch -p1 < ../shutdown_fix.patch
+}
+
+build() {
+  cd ${srcdir}/${_pkgname}
+  cmake . -DCMAKE_EXE_LINKER_FLAGS="-L/usr/lib/mali-egl" -Wno-dev
+  make -j17 V=1 VERBOSE=1
+}
+
+package() {
+  cd ${srcdir}
+
+  install -Dm755 "$srcdir/$_pkgname/emulationstation" -t "$pkgdir/opt/emulationstation"
+  cp -rv $_pkgname/resources $pkgdir/opt/emulationstation
+
+  install -Dm644 "$srcdir/$_pkgname/LICENSE.md" "$pkgdir/usr/share/licenses/emulationstation/LICENSE"
+
+  install -Dm755 emulationstation.sh $pkgdir/usr/bin/emulationstation
+  install -Dm755 emulationstation.service -t $pkgdir/etc/systemd/system
+
+  install -Dm644 es_systems.cfg -t $pkgdir/etc
+  install -Dm644 es_input.cfg -t $pkgdir/etc
+
+}
+
+md5sums=('SKIP'
+         'eaf3a6a1a128c8fb386d5dea093383b9'
+         'ce2fd497817e36e854803052b32b2381'
+         '42eec2c382442eb2908ec6eff86fb269'
+         'de91c80c6d2eb0459acae315a6000607'
+         '9eff990109e3b9d58b891e5676c8dc9d'
+         '9a4e842a53ac125ee49c408b68943f9c'
+         'c769bdd58cab9bc729eda2e0ac1db10d'
+         '505cf95de9cd9203bf3ad82ab08f3e11')
+md5sums=('SKIP'
+         'eaf3a6a1a128c8fb386d5dea093383b9'
+         'ce2fd497817e36e854803052b32b2381'
+         '6bd88118c2afc779992d0ff5bec12d8c'
+         'de91c80c6d2eb0459acae315a6000607'
+         '9eff990109e3b9d58b891e5676c8dc9d'
+         '9a4e842a53ac125ee49c408b68943f9c'
+         'c769bdd58cab9bc729eda2e0ac1db10d'
+         '505cf95de9cd9203bf3ad82ab08f3e11')
+md5sums=('SKIP'
+         'eaf3a6a1a128c8fb386d5dea093383b9'
+         'ce2fd497817e36e854803052b32b2381'
+         'fdf0f6d1ad254293dd556cdf1c1c8520'
+         'de91c80c6d2eb0459acae315a6000607'
+         '9eff990109e3b9d58b891e5676c8dc9d'
+         '9a4e842a53ac125ee49c408b68943f9c'
+         'c769bdd58cab9bc729eda2e0ac1db10d'
+         '505cf95de9cd9203bf3ad82ab08f3e11')
+md5sums=('SKIP'
+         'eaf3a6a1a128c8fb386d5dea093383b9'
+         'ce2fd497817e36e854803052b32b2381'
+         'a9fc2cf47bbea4fc815f92cf269fc294'
+         'de91c80c6d2eb0459acae315a6000607'
+         '9eff990109e3b9d58b891e5676c8dc9d'
+         '9a4e842a53ac125ee49c408b68943f9c'
+         'c769bdd58cab9bc729eda2e0ac1db10d'
+         '505cf95de9cd9203bf3ad82ab08f3e11')

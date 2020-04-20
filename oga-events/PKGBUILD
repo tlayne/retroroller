@@ -1,0 +1,20 @@
+# Maintainer: valadaa48
+
+pkgname=oga-events
+pkgver=1.0.1
+pkgrel=2
+pkgdesc="OGA global events"
+arch=('aarch64')
+url=https://github.com/valadaa48
+license=('GLPL2')
+depends=(python-evdev light)
+source=(
+    'oga-events'
+    'oga-events.service'
+)
+md5sums=('SKIP' 'SKIP')
+
+package() {
+	install -Dm755 oga-events -t ${pkgdir}/usr/bin
+	install -Dm755 oga-events.service -t ${pkgdir}/etc/systemd/system
+}

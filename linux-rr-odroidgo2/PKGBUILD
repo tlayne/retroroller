@@ -1,0 +1,59 @@
+# Maintainer: valadaa48
+# vim: ft=sh:
+
+pkgname=linux-rr-odroidgo2
+pkgver=4.4.189
+pkgrel=10
+pkgdesc="HardKernel odroidgo2 kernel"
+arch=('aarch64')
+url="https://github.com/hardkernel/linux"
+license=('GPL')
+options=(!strip)
+source=(
+    'git+https://github.com/hardkernel/linux#branch=odroidgoA-4.4.y'
+    'boot.ini'
+    'config'
+)
+md5sums=(
+    'SKIP'
+    'SKIP'
+    'SKIP'
+)
+backup=(
+    'boot/boot.ini'
+)
+
+prepare() {
+    cd ${srcdir}/linux
+}
+
+build() {
+    export ARCH=arm64
+    export CROSS_COMPILE=aarch64-linux-gnu-
+    export LDFLAGS=""
+    export PATH=/opt/toolchains/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin/:$PATH
+    export KBUILD=${srcdir}/linux
+
+    cd ${srcdir}/linux
+#    make odroidgo2_defconfig
+    cp -v ../config .config
+    make menuconfig
+    make
+    make dtbs
+}
+
+package() {
+    export ARCH=arm64
+    export CROSS_COMPILE=aarch64-linux-gnu-
+    export LDFLAGS=""
+    export PATH=/opt/toolchains/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin/:$PATH
+    export KBUILD=${srcdir}/linux
+    cd ${srcdir}/linux
+
+    install -vDm 644 arch/arm64/boot/Image -t "$pkgdir/boot"
+    install -vDm 644 ../boot.ini -t "$pkgdir/boot"
+    install -vDm 644 arch/arm64/boot/dts/rockchip/rk3326-odroidgo2-linux.dtb -t "$pkgdir/boot"
+
+    make INSTALL_MOD_PATH="$pkgdir/usr" modules_install
+    fd .ko $pkgdir/usr -x aarch64-linux-gnu-strip --strip-debug --strip-unneeded {}
+}

@@ -1,0 +1,49 @@
+# Maintainer: valadaa48
+
+pkgname=libgo2
+pkgver=r32.fc78629
+pkgrel=2
+pkgdesc="Support library for the ODROID-GO Advance"
+arch=('aarch64')
+url="https://github.com/OtherCrashOverride/libgo2"
+license=('GLPL2')
+makedepends=(git)
+# -lEGL -levdev -lgbm -lpthread -ldrm -lm -lrga -lpng -lasound
+depends=(
+    alsa-lib
+    libdrm
+    libevdev
+    libpng
+    librga
+    mesa
+    openal
+)
+source=(
+	'git+https://github.com/OtherCrashOverride/libgo2'
+    'include_path.patch'
+)
+
+pkgver() {
+	cd "${srcdir}/${pkgname}"
+	echo "r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+	cd ${pkgname}
+	patch -p1 < ../include_path.patch
+}
+
+build() {
+	cd ${pkgname}
+	premake4 gmake
+    export DEFINES="-fomit-frame-pointer --fast-math"
+	make config=release verbose=1
+}
+
+package() {
+	cd ${pkgname}
+	install -Dm755 libgo2.so -t ${pkgdir}/usr/lib
+	install -Dm644 src/*.h -t ${pkgdir}/usr/include/go2
+}
+md5sums=('SKIP'
+         '85cfe45aac1696f51e00f0bf3e9b937b')

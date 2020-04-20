@@ -1,0 +1,38 @@
+# Maintainer: valadaa48
+
+_pkgname=rs97-commander-sdl2
+pkgname=dingux-commander-sdl2
+pkgver=3.fb6ff74
+pkgrel=3
+pkgdesc="rs97-commander-sdl2"
+arch=('aarch64')
+url="https://github.com/zfteam/rs97-commander-sdl2"
+license=('GPL')
+depends=(sdl2 sdl2_image sdl2_ttf sdl2_gfx)
+source=('git+https://github.com/zfteam/rs97-commander-sdl2'
+  'dinguxcommander.sh')
+
+pkgver() {
+    cd "$_pkgname"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+build() {
+  cd "$_pkgname"
+  make
+}
+
+package() {
+  cd $_pkgname
+  install -dm755 $pkgdir/opt/dinguxcommander
+  install -dm755 $pkgdir/opt/dinguxcommander/res
+  install -Dm755 $srcdir/$_pkgname/DinguxCommander -t $pkgdir/opt/dinguxcommander
+  cp -rv $srcdir/$_pkgname/res $pkgdir/opt/dinguxcommander/
+
+  install -dm755 $pkgdir/usr/bin
+  install -m755 $srcdir/dinguxcommander.sh $pkgdir/usr/bin/dinguxcommander
+}
+
+# vim: ts=2 sw=2 et:
+md5sums=('SKIP'
+         'c2b0723e66103b7bd3b5410be959dea2')

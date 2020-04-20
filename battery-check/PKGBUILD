@@ -1,0 +1,19 @@
+# Maintainer: valadaa48
+
+pkgname=battery-check
+pkgver=1.0.0
+pkgrel=4
+pkgdesc="Flashes LED when battery is low"
+arch=('aarch64')
+url=https://github.com/valadaa48
+license=('GLPL2')
+source=(
+    'battery-check'
+    'battery-check.service'
+)
+md5sums=('SKIP' 'SKIP')
+
+package() {
+	install -Dm755 battery-check -t ${pkgdir}/usr/local/sbin
+	install -Dm644 battery-check.service -t ${pkgdir}/etc/systemd/system
+}

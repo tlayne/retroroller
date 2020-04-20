@@ -1,0 +1,49 @@
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+_commit=8867101e509ec9e99c2330b1dbd9830ec9350ffe
+_pkgname=libmali
+pkgbase=mali-bifrost-g31-libgl
+pkgname="${pkgbase}-gbm-armhf"
+pkgver=r6p0.01rel0
+pkgrel=1
+pkgdesc="Mali GPU library used in Rockchip Platform"
+arch=('aarch64')
+url="https://github.com/rockchip-linux/libmali"
+license=('Proprietary')
+provides=('mali-bifrost-g31-libgl-armhf')
+source=('https://github.com/rockchip-linux/libmali/archive/8867101e509ec9e99c2330b1dbd9830ec9350ffe.tar.gz'
+    'mali-armhf.conf'
+    '50-mali-armhf.rules')
+
+md5sums=('a6dd69b5fc330dd24193b851a4feb8d6'
+         '84f152420c069b2fb6836c2acb14f76b'
+         'd22820a21496fe3d9ccbae99643aac96')
+
+_gles_libs=('libMali.so'
+        'libEGL.so'
+        'libEGL.so.1'
+        'libEGL.so.1.0.0'
+        'libEGL.so.1.1.0'
+        'libGLESv1_CM.so'
+        'libGLESv1_CM.so.1'
+        'libGLESv1_CM.so.1.1.0'
+        'libGLESv2.so'
+        'libGLESv2.so.2'
+        'libGLESv2.so.2.0.0'
+        'libgbm.so'
+        'libgbm.so.1')
+
+package() {
+    install -d "${pkgdir}"/usr/lib/mali-egl-armhf
+    install -d "${pkgdir}"/etc/ld.so.conf.d
+    install -d "${pkgdir}"/usr/lib/udev/rules.d
+
+    cp -a "${srcdir}"/"${_pkgname}-${_commit}"/lib/arm-linux-gnueabihf/libmali-bifrost-g31-rxp0-gbm.so "${pkgdir}"/usr/lib/mali-egl-armhf
+    cp "${srcdir}"/mali-armhf.conf "${pkgdir}"/etc/ld.so.conf.d
+    cp "${srcdir}"/50-mali-armhf.rules "${pkgdir}"/usr/lib/udev/rules.d
+
+    for lib in ${_gles_libs[@]}
+    do
+        ln -sf /usr/lib/mali-egl-armhf/libmali-bifrost-g31-rxp0-gbm.so "${pkgdir}/usr/lib/mali-egl-armhf/$lib"
+    done
+}

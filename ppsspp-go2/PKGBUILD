@@ -1,0 +1,135 @@
+# Maintainer: valadaa48
+
+pkgname=ppsspp-go2
+pkgver=121.e4c6359
+pkgrel=1
+pkgdesc='A PSP emulator written in C++ built against libgo2'
+arch=(x86_64 aarch64)
+url=http://www.ppsspp.org/
+license=(GPL2)
+provides=(ppsspp)
+conflicts=(ppsspp)
+depends=(
+  glibc
+  sdl2
+  zlib
+  libgo2
+)
+makedepends=(
+  cmake
+  git
+  libzip
+  python
+)
+source=(
+  git+https://github.com/OtherCrashOverride/ppsspp-go2
+  ppsspp.sh
+)
+sha256sums=('SKIP'
+            'SKIP'
+)
+
+pkgver() {
+    cd ${srcdir}/${_pkgname}
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  cd ${srcdir}/${pkgname}
+  rm -rf build
+  mkdir build
+
+  git submodule update --init --recursive
+
+  sed -i 's:drm/drm:libdrm/drm:' SDL/SDLMain.cpp
+
+  cd ffmpeg
+  git checkout master
+}
+
+build() {
+# ffmpeg
+
+  cd ${srcdir}/${pkgname}/ffmpeg
+
+  ./configure \
+      --prefix=./linux/aarch64 \
+      --extra-libs='-lgcc' \
+      --extra-cflags="-march=armv8-a -mtune=cortex-a35 -mcpu=cortex-a35 -O3 -fasm -Wno-psabi -fno-short-enums -fno-strict-aliasing -finline-limit=300 --fast-math -fomit-frame-pointer -fPIC -flto=4" \
+      --disable-shared \
+      --enable-static \
+      --enable-zlib \
+      --disable-everything \
+      --disable-avdevice \
+      --disable-filters \
+      --disable-programs \
+      --disable-network \
+      --disable-avfilter \
+      --disable-postproc \
+      --disable-encoders \
+      --disable-protocols \
+      --disable-hwaccels \
+      --disable-doc \
+      --enable-decoder=h264 \
+      --enable-decoder=mpeg4 \
+      --enable-decoder=mpeg2video \
+      --enable-decoder=mjpeg \
+      --enable-decoder=mjpegb \
+      --enable-decoder=aac \
+      --enable-decoder=aac_latm \
+      --enable-decoder=atrac3 \
+      --enable-decoder=atrac3p \
+      --enable-decoder=mp3 \
+      --enable-decoder=pcm_s16le \
+      --enable-decoder=pcm_s8 \
+      --enable-demuxer=h264 \
+      --enable-demuxer=m4v \
+      --enable-demuxer=mpegvideo \
+      --enable-demuxer=mpegps \
+      --enable-demuxer=mp3 \
+      --enable-demuxer=avi \
+      --enable-demuxer=aac \
+      --enable-demuxer=pmp \
+      --enable-demuxer=oma \
+      --enable-demuxer=pcm_s16le \
+      --enable-demuxer=pcm_s8 \
+      --enable-demuxer=wav \
+      --enable-encoder=huffyuv \
+      --enable-encoder=ffv1 \
+      --enable-encoder=mjpeg \
+      --enable-encoder=pcm_s16le \
+      --enable-muxer=avi \
+      --enable-parser=h264 \
+      --enable-parser=mpeg4video \
+      --enable-parser=mpegaudio \
+      --enable-parser=mpegvideo \
+      --enable-parser=aac \
+      --enable-parser=aac_latm
+
+  # make clean
+  make -j17 V=1 VERBOSE=1
+  make install
+
+  cd ${srcdir}/${pkgname}/build
+
+  cmake .. \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DUSE_SYSTEM_LIBZIP=OFF \
+    -DUSE_SYSTEM_FFMPEG=OFF \
+    -DUSING_X11_VULKAN=OFF \
+    -DUSE_DISCORD=OFF
+
+  make VERBOSE=1
+}
+
+package() {
+  cd ${srcdir}/${pkgname}/build
+
+  install -dm 755 "${pkgdir}"/{opt/ppsspp,/usr/bin}
+  install -m 755 PPSSPPSDL -t "${pkgdir}"/opt/ppsspp/
+  cp -dr --no-preserve=ownership assets "${pkgdir}"/opt/ppsspp/
+  install -m755 ../../ppsspp.sh "${pkgdir}"/usr/bin/ppsspp
+}
+
+# vim: ts=2 sw=2 et:

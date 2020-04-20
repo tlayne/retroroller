@@ -1,0 +1,85 @@
+# Maintainer: Daniel Bermond <dbermond@archlinux.org>
+# Contributor: valadaa48 <valadaa48@gmx.com>
+
+# NOTE:
+# The additional field in $pkgver is in the format 'YYYMMDD.HHMMSS', which
+# is the the date (in UTC time) of the last git commit from all git sources.
+# This additional field allows to trigger an upgrade in the package when any
+# mupen64plus component receives a new commit.
+
+pkgname=mupen64plus-git
+pkgver=2.5.9
+pkgrel=1
+pkgdesc='Nintendo64 Emulator (git version)'
+arch=('x86_64' 'aarch64')
+url='https://www.mupen64plus.org/'
+license=('GPL')
+#depends=('speexdsp' 'minizip' 'sdl2' 'glu' 'libsamplerate' 'libpng'
+#         'freetype2' 'boost-libs' 'hicolor-icon-theme' 'desktop-file-utils')
+makedepends=('git' 'nasm' 'mesa' 'boost')
+provides=('mupen64plus')
+conflicts=('mupen64plus')
+source=('mupen64plus-core::git+https://github.com/OtherCrashOverride/mupen64plus-core-go2'
+  'git+https://github.com/mupen64plus/mupen64plus-rsp-hle.git#commit=f295d34'
+  'git+https://github.com/mupen64plus/mupen64plus-video-rice.git#commit=677257a'
+  'git+https://github.com/mupen64plus/mupen64plus-audio-sdl.git#commit=b51ea78'
+  'git+https://github.com/OtherCrashOverride/mupen64plus-input-sdl-go2'
+  'git+https://github.com/mupen64plus/mupen64plus-ui-console.git#commit=5ec0b2a'
+  'mupen64plus-video-rice-aarch64.patch'
+  'mupen64plus-video-rice-res.patch')
+
+_m64p_components='core rsp-hle video-rice audio-sdl input-sdl-go2 ui-console'
+_opts='BITS=64 USE_GLES=1 NEW_DYNAREC=1 OPTFLAGS="-O3" V=1'
+
+prepare() {
+    cd mupen64plus-video-rice
+    patch -Np1 -i ../mupen64plus-video-rice-aarch64.patch
+    patch -Np1 -i ../mupen64plus-video-rice-res.patch
+}
+
+build() {
+  local _flags="-O3"
+  export CFLAGS="${CFLAGS} ${_flags}"
+  export CXXFLAGS="${CXXFLAGS} ${_flags}"
+
+  local _component
+  for _component in $_m64p_components
+  do
+    printf '%s\n' "  -> Building component '${_component}'..."
+    make -C "mupen64plus-${_component}/projects/unix" clean
+    make -C "mupen64plus-${_component}/projects/unix" PREFIX='/usr' $_opts all
+  done
+}
+
+package() {
+  local _component
+  for _component in $_m64p_components
+  do
+    make -C "mupen64plus-${_component}/projects/unix" PREFIX='/usr' $_opts install DESTDIR="${pkgdir}"
+
+    local _doc
+    for _doc in LICENSES README RELEASE; do
+      if [ -e "${srcdir}/mupen64plus-${_component}/${_doc}" ]; then
+        install -Dm644 "${srcdir}/mupen64plus-${_component}/${_doc}" -t "${pkgdir}/usr/share/doc/mupen64plus-${_component}"
+      fi
+    done
+
+    local _subdoc
+    for _subdoc in gpl-license font-license lgpl-license module-api-versions.txt; do
+      if [ -e "${srcdir}/mupen64plus-${_component}/doc/${_subdoc}" ]; then
+        install -Dm644 "${srcdir}/mupen64plus-${_component}/doc/${_subdoc}" -t "${pkgdir}/usr/share/doc/mupen64plus-${_component}"
+      fi
+    done
+  done
+
+  chmod -R 755 ${pkgdir}/usr/lib/*
+}
+
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            '5bb2111de28c7e7c148555b8fdfb61f9c013ac205447fcc1a0555cad707d6d23'
+            '37eee8e97d8da26ee9799e8018c5614448b50e54eb20ada72145c1a8100fbe3f')

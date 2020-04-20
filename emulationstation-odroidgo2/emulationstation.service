@@ -1,0 +1,14 @@
+[Unit]
+Description=Emulation Station
+
+[Service]
+Type=simple
+User=odroid
+ExecStart=/usr/bin/emulationstation
+StandardInput=tty-force
+TTYVHangup=yes
+TTYPath=/dev/tty20
+TTYReset=yes
+
+[Install]
+WantedBy=multi-user.target
