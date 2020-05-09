@@ -60,6 +60,7 @@ class RetroLauncher(object):
             items = [x for x in sorted(cmds.keys()) if x != "RetroLauncher"]
             items += [""]  # separator
             items += [
+                "neofetch",
                 "System Update",
                 "Restart Retro Launcher",
                 "Reboot",
@@ -78,6 +79,8 @@ class RetroLauncher(object):
                 self._run_command("systemctl reboot", redirect=False)
             elif tag == "Shutdown":
                 self._run_command("systemctl poweroff", redirect=False)
+            elif tag == "neofetch":
+                self._run_command("neofetch --ascii_distro Arch_small && sleep 5", redirect=False, disable_kb=False)
 
     @staticmethod
     def _get_cmds():
@@ -87,8 +90,9 @@ class RetroLauncher(object):
             cmds[basename] = path
         return cmds
 
-    def _run_command(self, cmd, redirect=True):
-        self.enable_kb = False
+    def _run_command(self, cmd, redirect=True, disable_kb=True):
+        if disable_kb:
+            self.enable_kb = False
         self._dialog.clear()
         if redirect:
             cmd += " &>> /tmp/retrolauncher.log"

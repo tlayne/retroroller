@@ -1,7 +1,7 @@
 # Maintainer: valadaa48 <valadaa48@gmx.com>
 
 pkgname=retrolauncher
-pkgver=1.0.3
+pkgver=1.0.5
 pkgrel=1
 pkgdesc="Low resource launcher"
 arch=('any')
@@ -10,6 +10,7 @@ license=('GPL2')
 depends=(
     python-evdev
     python-uinput
+    python-pythondialog
 )
 source=(
     20-retrolauncher-uinput.rules
@@ -29,6 +30,6 @@ package() {
 	install -D retrolauncher.service -t ${pkgdir}/etc/systemd/system
 }
 md5sums=('b240977225748b85468cea092d464091'
-         'b0e125925ff347bad7343890fde3d6b8'
+         'e20e7c678ce96d856af8cf79745aa0da'
          'a847a3ec11b91916cd723b26f194f0ec'
-         'b6bcd61a92035481bcbf102ce09c76fa')
+         'd224a6e329d5bf2139a3c960464cbb36')
