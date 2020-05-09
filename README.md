@@ -1,5 +1,11 @@
 ![alt text](logo.png "RetroRoller")
 
+# RetroRoller
+
+Based on ArchLinux, RetroRoller's primary focus is on performance to deliver the
+best gaming experience. It is an open platform that anyone can and is encouraged
+to contribute to.
+
 ## Installation
 
 1. Download
@@ -7,8 +13,7 @@
 2. Burn to sdcard
 3. On partition 1 (fat32) edit `wpa_supplicant-wlan0.conf` and fill
    in `ssid` and `psk` fields. You can add multiple network blocks.
-4. Boot in OGA
-5. Wait for partition expansion (blue LED tracks MMC activity)
+4. Boot in OGA and wait for Emulation Station.
 
 
 ## Inputs
@@ -100,7 +105,7 @@ Will flash the blue LED when the battery reaches 10% capacity.
 ### rr-launcher
 
 Extremely lightweight launcher that uses pretty much no RAM and 0 CPU. It's a
-siple round-robin script that alternates between apps. Good for those that just
+simple round-robin script that alternates between apps. Good for those that just
 care about booting right into RetroArch and a few other apps.
 
 ## Credits
