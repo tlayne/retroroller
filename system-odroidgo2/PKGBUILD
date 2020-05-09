@@ -3,7 +3,7 @@
 
 pkgname=system-odroidgo2
 pkgver=1.1.0
-pkgrel=4
+pkgrel=5
 pkgdesc="Odroidgo2 system files"
 arch=('aarch64')
 license=('GPL')
@@ -67,5 +67,5 @@ md5sums=('462cd4e44563ebdca4ebf6130311aef8'
          '3ed634a68f3c1af702a532668b5b7a78'
          'b31375220c157ad8bf4eacfd3d27d20d'
          'b01abad415ad1e904e5ad2070f9c486a'
-         'a9fbba14e81ddd55840e10207e0f1d27'
+         'c609ff1d2ab910e992768c93a722d25f'
          '3caef40123ef9ec20459cb68d6db48fd')
