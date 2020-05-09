@@ -4,6 +4,7 @@ Description=Retro Launcher
 [Service]
 User=odroid
 ExecStart=/usr/bin/retrolauncher
+ExecStop=/usr/bin/clear
 Type=simple
 StandardInput=tty-force
 StandardOutput=tty
