@@ -3,7 +3,7 @@
 
 pkgname=system-odroidgo2
 pkgver=1.1.0
-pkgrel=3
+pkgrel=4
 pkgdesc="Odroidgo2 system files"
 arch=('aarch64')
 license=('GPL')
@@ -19,15 +19,19 @@ source=(
   onboot.service
   performance
   10-disable-power.rules
+  smb.conf
+  odroid_profile.sh
 )
 backup=(
   usr/lib/systemd/system-sleep/sleep
   etc/polkit-1/rules.d/10-disable-power.rules
   usr/local/sbin/onboot.sh
+  etc/samba/smb.conf
 )
 
 package() {
   install -d "$pkgdir"/etc/polkit-1/rules.d
+
   cp 10-disable-power.rules -t "$pkgdir"/etc/polkit-1/rules.d
   cp 05-nopasswd.rules "$pkgdir"/etc/polkit-1/rules.d
 
@@ -44,6 +48,10 @@ package() {
 
   install -Dm 755 performance -t "$pkgdir"/usr/bin
 
+  install -Dm 755 odroid_profile.sh -t "$pkgdir"/etc/profile.d
+
+  install -Dm 644 smb.conf -t "$pkgdir"/etc/samba
+
   install -d "$pkgdir"/etc/sudoers.d
   cp 10-wheel "$pkgdir"/etc/sudoers.d
   chmod 440 "$pkgdir"/etc/sudoers.d/10-wheel
@@ -58,4 +66,6 @@ md5sums=('462cd4e44563ebdca4ebf6130311aef8'
          'f0c3e72d80cfe3fc9246a80b6ac5b4d3'
          '3ed634a68f3c1af702a532668b5b7a78'
          'b31375220c157ad8bf4eacfd3d27d20d'
-         'b01abad415ad1e904e5ad2070f9c486a')
+         'b01abad415ad1e904e5ad2070f9c486a'
+         'a9fbba14e81ddd55840e10207e0f1d27'
+         '3caef40123ef9ec20459cb68d6db48fd')
