@@ -64,6 +64,12 @@ Be sure to check out any .pacnew files created and merge them.
 
 ### Retro Launcher
 
+Lightweight launcher instead of ES. ES uses 5-8% CPU and a lot of RAM. Retro
+Launcher uses 4-8MB RAM and ~0% CPU. ES can also be launched from RL.
+Conversely, RL can also be launched from ES.
+
+It also has a live updater to update packages.
+
 To start on boot:
 
     sudo systemctl disable emulationstation
@@ -78,10 +84,24 @@ To start on boot:
 
 ### PPSSPP
 
-- PPSSPP doesn't have a native browser so unfortunately the only way to launch
+ PPSSPP doesn't have a native browser so unfortunately the only way to launch
   new titles is via ES. Once a rom is launched it will remain in the menu so you
 can launch ppsspp directly.
 
+
+### oga-events
+
+Global hot key service
+
+### battery-check
+
+Will flash the blue LED when the battery reaches 10% capacity.
+
+### rr-launcher
+
+Extremely lightweight launcher that uses pretty much no RAM and 0 CPU. It's a
+siple round-robin script that alternates between apps. Good for those that just
+care about booting right into RetroArch and a few other apps.
 
 ## Credits
 
