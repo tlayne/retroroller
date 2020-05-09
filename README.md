@@ -114,6 +114,11 @@ So far we've managed to upstream the mali and rga userspace drivers into the
 official ArchLinux ARM repos. The ArchLinux ARM maintainer is open to merge 
 my kernel package after he's acquired an OGA himself for testing.
 
+### Futher links
+
+- [Building packages](building.md)
+- [Making a chroot](chroot.md)
+
 ## Credits
 
 - NOirBRight and npaladin2000 for testing and feedback
