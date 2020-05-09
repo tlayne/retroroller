@@ -3,7 +3,7 @@
 
 pkgname=system-odroidgo2
 pkgver=1.1.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Odroidgo2 system files"
 arch=('aarch64')
 license=('GPL')
@@ -49,13 +49,13 @@ package() {
   chmod 440 "$pkgdir"/etc/sudoers.d/10-wheel
 }
 md5sums=('462cd4e44563ebdca4ebf6130311aef8'
-  'df08909ec5cf51858233eba4965a3435'
-  '2f0d3ab537798256e4fc6ccf938772dc'
-  'db8d26383a8bbfa19604e6b1c09bda3a'
-  '94149723729db59cd3971af1eabf3f04'
-  'c55b4240d34e98a600313f9619232bc2'
-  '439fa94c8fcab8ddd10c95c77a913887'
-  '29c043d301afdd7b790c03899667a550'
-  '3ed634a68f3c1af702a532668b5b7a78'
-  'b31375220c157ad8bf4eacfd3d27d20d'
-  'b01abad415ad1e904e5ad2070f9c486a')
+         'df08909ec5cf51858233eba4965a3435'
+         '2f0d3ab537798256e4fc6ccf938772dc'
+         'db8d26383a8bbfa19604e6b1c09bda3a'
+         '94149723729db59cd3971af1eabf3f04'
+         'c55b4240d34e98a600313f9619232bc2'
+         '439fa94c8fcab8ddd10c95c77a913887'
+         'f0c3e72d80cfe3fc9246a80b6ac5b4d3'
+         '3ed634a68f3c1af702a532668b5b7a78'
+         'b31375220c157ad8bf4eacfd3d27d20d'
+         'b01abad415ad1e904e5ad2070f9c486a')

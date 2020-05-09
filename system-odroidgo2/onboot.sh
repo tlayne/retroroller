@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [ -f /boot/wpa_supplicant-wlan0.conf ]; then
+	cp /boot/wpa_supplicant-wlan0.conf /etc/wpa_supplicant/
+	chmod 644 /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
+fi
+
 echo 0 > /proc/sys/kernel/nmi_watchdog
 echo 1500 > /proc/sys/vm/dirty_writeback_centisecs
 echo disabled > /sys/class/net/wlan0/device/power/wakeup
