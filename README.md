@@ -80,11 +80,11 @@ To start on boot:
 
 ## Credits
 
-- NOirBRight for testing and feedback
+- NOirBRight and npaladin2000 for testing and feedback
 - M00D\_Sanchez for the artwork
 - Safarikniv for testing and hosting the RetroArch cores
 - CrashOverride for all the dev work he's done on the platform
-- Lakka team for all the collaboration
-- All the fans in #odroidgo-advance including BadBrent and npaladin2000
+- Lakka and EmuELEC team for all the collaboration
+- All the fans in #odroidgo-advance including BadBrent
 
 [//]: # vim: set textwidth=80:
