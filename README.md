@@ -108,6 +108,12 @@ Extremely lightweight launcher that uses pretty much no RAM and 0 CPU. It's a
 simple round-robin script that alternates between apps. Good for those that just
 care about booting right into RetroArch and a few other apps.
 
+### What's been upstreamed
+
+So far we've managed to upstream the mali and rga userspace drivers into the
+official ArchLinux ARM repos. The ArchLinux ARM maintainer is open to merge 
+my kernel package after he's acquired an OGA himself for testing.
+
 ## Credits
 
 - NOirBRight and npaladin2000 for testing and feedback
