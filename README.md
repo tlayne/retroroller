@@ -5,7 +5,7 @@
 1. Download
 [archlinux-retroroller-20200508.img.gz](http://localhost)
 2. Burn to sdcard
-3. On partition 2 edit `/etc/wpa_supplicant/wpa_supplicant-wlan0.conf` and fill
+3. On partition 1 (fat32) edit `wpa_supplicant-wlan0.conf` and fill
    in `ssid` and `psk` fields. You can add multiple network blocks.
 4. Boot in OGA
 5. Wait for partition expansion (blue LED tracks MMC activity)
@@ -41,8 +41,7 @@
 - Download additional cores in RetroArch online updater
 - Edit `~/.emulationstation/es_systems.cfg` to configure more ES systems
 - Rolling distribution (hopefully will never have to re-image)
-- 64-bit OS but RetroArch32 was ported to work solely to have fast PSX and
-  Dreamcast. 
+- 64-bit OS but RetroArch32 was ported to work solely to have fast PSX
 - Check retroarch config settings if you want to know where everything goes
 - Default user/pass: odroid/odroid; root/odroid
 - Includes SDL2 w/ rotation rebased to recent SDL2 version
@@ -76,6 +75,12 @@ To start on boot:
 
     sudo systemctl enable emulationstation
     sudo systemctl disable retrolauncher
+
+### PPSSPP
+
+- PPSSPP doesn't have a native browser so unfortunately the only way to launch
+  new titles is via ES. Once a rom is launched it will remain in the menu so you
+can launch ppsspp directly.
 
 
 ## Credits
