@@ -80,7 +80,7 @@ class RetroLauncher(object):
             elif tag == "Shutdown":
                 self._run_command("systemctl poweroff", redirect=False)
             elif tag == "neofetch":
-                self._run_command("neofetch --ascii_distro Arch_small && sleep 5", redirect=False, disable_kb=False)
+                self._run_command("neofetch --ascii_distro Arch_small && read -n 1", redirect=False, disable_kb=False)
 
     @staticmethod
     def _get_cmds():

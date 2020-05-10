@@ -9,7 +9,7 @@ Type=simple
 StandardInput=tty-force
 StandardOutput=tty
 TTYVHangup=yes
-TTYPath=/dev/tty1
+TTYPath=/dev/tty3
 TTYReset=yes
 Restart=always
 

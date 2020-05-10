@@ -1,7 +1,7 @@
 # Maintainer: valadaa48 <valadaa48@gmx.com>
 
 pkgname=retrolauncher
-pkgver=1.0.5
+pkgver=1.0.6
 pkgrel=1
 pkgdesc="Low resource launcher"
 arch=('any')
@@ -30,6 +30,6 @@ package() {
 	install -D retrolauncher.service -t ${pkgdir}/etc/systemd/system
 }
 md5sums=('b240977225748b85468cea092d464091'
-         'e20e7c678ce96d856af8cf79745aa0da'
-         'a847a3ec11b91916cd723b26f194f0ec'
-         'd224a6e329d5bf2139a3c960464cbb36')
+         'ef764d95beb4018462ee6d4d7c3de940'
+         'b7b7b93b66b40c7658f29eddf24a1d21'
+         'c1dbaa61d7f67a1d621efdf9037c524e')
