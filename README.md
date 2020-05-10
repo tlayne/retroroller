@@ -40,6 +40,7 @@ to contribute to.
 | F1 + B                | Pause                 |
 | F1 + L1               | Load state            |
 | F1 + R1               | Save state            |
+| F1 + F6               | Exit RetroArch from game |
 
 ## General Setup
 
