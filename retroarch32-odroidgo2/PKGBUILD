@@ -1,27 +1,27 @@
-# Maintainer: valadaa48
+# Maintainer: valadaa48 <valadaa48@gmx.com>
 
 pkgname=retroarch32-odroidgo2
 pkgver=53435.ce4c750326
-pkgrel=9
+pkgrel=10
 pkgdesc="Retroarch32 (armhf) for odroidgo2"
 arch=('aarch64')
 url="https://github.com/libretro/RetroArch"
 license=('GPL')
 depends=('lib32-compat-odroidgo2' 'mali-bifrost-g31-libgl-gbm-armhf')
 source=(
-	'retroarch32.cfg'
-    'armhf-retroarch'
-    'retroarch32'
+  'retroarch32.cfg'
+  'armhf-retroarch'
+  'retroarch32'
 )
 backup=('etc/retroarch32.cfg')
 options=(!strip)
 
 package() {
-    install -Dm644 ../retroarch32.cfg -t ${pkgdir}/etc
-    install -Dm755 ../retroarch32 -t ${pkgdir}/usr/bin
-    install -Dm755 ../armhf-retroarch -t ${pkgdir}/usr/bin
+  install -Dm644 ../retroarch32.cfg -t ${pkgdir}/etc
+  install -Dm755 ../retroarch32 -t ${pkgdir}/usr/bin
+  install -Dm755 ../armhf-retroarch -t ${pkgdir}/usr/bin
 }
 
-md5sums=('700d059ba8d3ea5e590c525d32caae99'
+md5sums=('2df73836ca91d5cb6b727cee03afe00a'
          '0be7b1787f08f9993a23394e98f21037'
          'c41086576b2858df8316a07634c3c5bc')
