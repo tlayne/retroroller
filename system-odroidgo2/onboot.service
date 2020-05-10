@@ -1,9 +1,11 @@
 [Unit]
 Description=Onboot
+Before=network-pre.target
+Wants=network-pre.target
 
 [Service]
 Type=forking
 ExecStart=/usr/local/sbin/onboot.sh
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=network.target
