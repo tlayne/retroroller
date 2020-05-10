@@ -3,7 +3,7 @@
 _pkgname=RetroArch
 pkgname=retroarch-odroidgo2
 pkgver=53289.66eed86ccf
-pkgrel=2
+pkgrel=3
 pkgdesc="Retroarch for odroidgo2"
 arch=('aarch64')
 url="https://github.com/libretro/RetroArch"
