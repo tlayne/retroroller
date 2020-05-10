@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
 
-if [ -f /boot/wpa_supplicant-wlan0.conf ]; then
-	cp /boot/wpa_supplicant-wlan0.conf /etc/wpa_supplicant/
-	chmod 644 /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
+if [ -f /etc/wpa_supplicant/wpa_supplicant-wlan0.conf ]; then
+    rm /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
 fi
+
+if [ -f /boot/wpa_supplicant.conf ]; then
+	cp /boot/wpa_supplicant.conf /etc/wpa_supplicant/
+	chmod 644 /etc/wpa_supplicant/wpa_supplicant.conf
+fi
+
+iw dev wlan0 set power_save off
 
 echo 0 > /proc/sys/kernel/nmi_watchdog
 echo 1500 > /proc/sys/vm/dirty_writeback_centisecs
 echo disabled > /sys/class/net/wlan0/device/power/wakeup
-
-iw dev wlan0 set power_save off
 
 echo 10 > /sys/devices/platform/odroidgo2-joypad/poll_interval
 
