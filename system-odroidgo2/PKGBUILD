@@ -3,7 +3,7 @@
 
 pkgname=system-odroidgo2
 pkgver=1.1.3
-pkgrel=1
+pkgrel=2
 pkgdesc="Odroidgo2 system files"
 arch=('aarch64')
 license=('GPL')
@@ -38,13 +38,13 @@ package() {
   install -Dm 755 sleep -t "$pkgdir"/usr/lib/systemd/system-sleep
 
   install -Dm 755 firstboot.sh -t "$pkgdir"/usr/local/sbin/
-  install -Dm 755 firstboot.service -t "$pkgdir"/etc/systemd/system
+  install -Dm 644 firstboot.service -t "$pkgdir"/etc/systemd/system
 
   install -Dm 755 firstboot2.sh -t "$pkgdir"/usr/local/sbin/
-  install -Dm 755 firstboot2.service -t "$pkgdir"/etc/systemd/system
+  install -Dm 644 firstboot2.service -t "$pkgdir"/etc/systemd/system
 
   install -Dm 755 onboot.sh -t "$pkgdir"/usr/local/sbin/
-  install -Dm 755 onboot.service -t "$pkgdir"/etc/systemd/system
+  install -Dm 644 onboot.service -t "$pkgdir"/etc/systemd/system
 
   install -Dm 755 performance -t "$pkgdir"/usr/bin
 
