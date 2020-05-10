@@ -2,7 +2,7 @@
 
 pkgname=retroperf-go2
 pkgver=r49.ff19475
-pkgrel=1
+pkgrel=2
 pkgdesc="libretro frontend for ODROID-GO Advance for perf testing"
 arch=('aarch64')
 url="https://github.com/OtherCrashOverride/retrorun-go2"
