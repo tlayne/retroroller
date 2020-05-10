@@ -1,9 +1,9 @@
-# Maintainer: valadaa48
+# Maintainer: valadaa48 <valadaa48@gmx.com>
 
 _pkgname=emulationstation-go2
 pkgname=emulationstation-odroidgo2
 pkgver=1469.f3f3535
-pkgrel=5
+pkgrel=6
 pkgdesc="Emulation Station is a flexible emulator front-end supporting keyboardless navigation and custom system themes. For odroidgo2."
 arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')
 url="https://github.com/RetroPie/EmulationStation"
@@ -39,6 +39,15 @@ source=(
   "es_input.cfg"
   "shutdown_fix.patch"
 )
+md5sums=('SKIP'
+         'eaf3a6a1a128c8fb386d5dea093383b9'
+         'ce2fd497817e36e854803052b32b2381'
+         'a9fc2cf47bbea4fc815f92cf269fc294'
+         '1e68d88fdd5292f2361b36043810504c'
+         '9eff990109e3b9d58b891e5676c8dc9d'
+         '2e981bfac7a5daea080aa287189c46d6'
+         'c769bdd58cab9bc729eda2e0ac1db10d'
+         '505cf95de9cd9203bf3ad82ab08f3e11')
 
 pkgver() {
   cd ${srcdir}/${_pkgname}
@@ -77,12 +86,3 @@ package() {
 
 }
 
-md5sums=('SKIP'
-         'eaf3a6a1a128c8fb386d5dea093383b9'
-         'ce2fd497817e36e854803052b32b2381'
-         'a9fc2cf47bbea4fc815f92cf269fc294'
-         '2ae8a987263766b0453ca363cd1c7bab'
-         '9eff990109e3b9d58b891e5676c8dc9d'
-         '2e981bfac7a5daea080aa287189c46d6'
-         'c769bdd58cab9bc729eda2e0ac1db10d'
-         '505cf95de9cd9203bf3ad82ab08f3e11')

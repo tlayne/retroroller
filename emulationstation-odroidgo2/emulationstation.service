@@ -7,7 +7,7 @@ User=odroid
 ExecStart=/usr/bin/emulationstation
 StandardInput=tty-force
 TTYVHangup=yes
-TTYPath=/dev/tty1
+TTYPath=/dev/tty3
 TTYReset=yes
 
 [Install]
