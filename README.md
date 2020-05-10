@@ -9,7 +9,7 @@ to contribute to.
 ## Installation
 
 1. Download
-[archlinux-retroroller-20200508.img.gz](http://localhost)
+[archlinux-retroroller-20200510.img.gz](http://localhost)
 2. Burn to sdcard
 3. On partition 1 (fat32) edit `wpa_supplicant-wlan0.conf` and fill
    in `ssid` and `psk` fields. You can add multiple network blocks.
