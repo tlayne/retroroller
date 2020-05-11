@@ -94,6 +94,13 @@ To start on boot:
   new titles is via ES. Once a rom is launched it will remain in the menu so you
 can launch ppsspp directly.
 
+### roms
+
+Roms go into respective system folders under /roms.
+
+### bios files
+
+Bios files need to be loaded in /home/odroid/.config/retroarch/bios folder.
 
 ### oga-events
 
