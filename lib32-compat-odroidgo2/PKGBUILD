@@ -2,8 +2,8 @@
 # vim: ft=sh:
 
 pkgname=lib32-compat-odroidgo2
-pkgver=1.1.0
-pkgrel=1
+pkgver=1.0.0
+pkgrel=15
 pkgdesc="armhf libs"
 arch=('aarch64')
 license=('GPL')
@@ -17,11 +17,7 @@ package() {
     cd ${srcdir}
     mkdir -p ${pkgdir}/usr/arm-linux-gnueabihf/lib
     cp -rv libs/usr/arm-linux-gnueabihf/lib/* -t ${pkgdir}/usr/arm-linux-gnueabihf/lib/
-
-    ln -sf ${pkgdir}/usr/arm-linux-gnueabihf/lib/libSDL2-2.0.so.0.9.0 ${pkgdir}/usr/arm-linux-gnueabihf/lib/libSDL2-2.0.so.0
-
     install -Dm755 libs/usr/lib/ld-linux-armhf.so.3 -t ${pkgdir}/usr/lib
-
     chmod -R 755 ${pkgdir}/*
 
     install -dm755 ${pkgdir}/etc/ld.so.conf.d
