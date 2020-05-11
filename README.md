@@ -15,6 +15,15 @@ to contribute to.
    in `ssid` and `psk` fields. You can add multiple network blocks.
 4. Boot in OGA and wait for Emulation Station.
 
+### Obligatory Disclaimer
+
+<i>This image is still under heavy development. Some packages include
+custom kernels and software built straight from git repositories that
+are still under testing. 
+
+We assume <b>zero liability</b> for whatever you do to your device - 
+run this image at your own risk!</i>
+
 
 ## Inputs
 
