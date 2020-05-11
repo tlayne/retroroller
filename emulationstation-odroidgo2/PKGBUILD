@@ -3,7 +3,7 @@
 _pkgname=emulationstation-go2
 pkgname=emulationstation-odroidgo2
 pkgver=1469.f3f3535
-pkgrel=7
+pkgrel=8
 pkgdesc="Emulation Station is a flexible emulator front-end supporting keyboardless navigation and custom system themes. For odroidgo2."
 arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')
 url="https://github.com/RetroPie/EmulationStation"
@@ -45,7 +45,7 @@ md5sums=('SKIP'
          'a9fc2cf47bbea4fc815f92cf269fc294'
          '1e68d88fdd5292f2361b36043810504c'
          '9eff990109e3b9d58b891e5676c8dc9d'
-         '845799ed96231b563fa9913fd625158f'
+         '83b838e044371f86be8dc6ab54865359'
          'c769bdd58cab9bc729eda2e0ac1db10d'
          '505cf95de9cd9203bf3ad82ab08f3e11')
 
