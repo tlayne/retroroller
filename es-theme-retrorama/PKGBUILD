@@ -1,20 +1,20 @@
-# Maintainer: valadaa48
+# Maintainer: valadaa48 <valadaa48@gmx.com>
 
 pkgname=es-theme-retrorama
-pkgver=1.0.0
+pkgver=1.1.0
 pkgrel=1
-pkgdesc="EmulationStation theme RetroRama"
-arch=('aarch64')
-makedepends=(p7zip)
-url=https://github.com/valadaa48
-license=('GLPL2')
-source=('RetroRama.7z')
+pkgdesc="EmulationStation theme RetroRama from M00DY"
+arch=(any)
+makedepends=(git)
+url=https://github.com/M00DY-DEV/OGA-EmulationStationThemes
+license=('GLPL3')
+source=('RetroRama::git+https://github.com/M00DY-DEV/OGA-EmulationStationThemes')
 md5sums=('SKIP')
 options=(!strip)
 
 package() {
     mkdir -p ${pkgdir}/etc/emulationstation/themes
     install -dm755 $pkgdir/etc/emulationstation/themes
-    cp -rv RetroRama ${pkgdir}/etc/emulationstation/themes/
+    cp -rv RetroRama/RetroRama ${pkgdir}/etc/emulationstation/themes/
     chmod -R 755 ${pkgdir}/etc/emulationstation/themes/RetroRama
 }
