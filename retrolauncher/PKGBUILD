@@ -2,7 +2,7 @@
 
 pkgname=retrolauncher
 pkgver=1.0.6
-pkgrel=2
+pkgrel=4
 pkgdesc="Low resource launcher"
 arch=('any')
 url=https://github.com/valadaa48/retrolauncher
@@ -21,7 +21,7 @@ source=(
     )
 md5sums=('b240977225748b85468cea092d464091'
     'ef764d95beb4018462ee6d4d7c3de940'
-    'b7b7b93b66b40c7658f29eddf24a1d21'
+    '917920ecdc823b328cc920a3d13516e6'
     'c1dbaa61d7f67a1d621efdf9037c524e')
 
 package() {
