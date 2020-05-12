@@ -148,6 +148,7 @@ my kernel package after he's acquired an OGA himself for testing.
 
 - NOirBRight and npaladin2000 for testing and feedback
 - M00D\_Sanchez for the artwork
+- Christian\_Haitian for debugging wifi issues
 - Safarikniv for testing and hosting the RetroArch cores
 - CrashOverride for all the dev work he's done on the platform
 - Lakka and EmuELEC team for all the collaboration
