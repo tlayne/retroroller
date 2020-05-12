@@ -136,6 +136,14 @@ my kernel package after he's acquired an OGA himself for testing.
 - [Building packages](building.md)
 - [Making a chroot](chroot.md)
 
+## Migrate to NetworkManager
+
+    sudo pacman -Syu
+    sudo pacman -S network-setup
+    
+    sudo systemctl disable dhcpcd
+    sudo systemctl enable NetworkManager
+
 ## Credits
 
 - NOirBRight and npaladin2000 for testing and feedback
