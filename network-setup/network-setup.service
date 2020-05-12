@@ -1,0 +1,11 @@
+[Unit]
+Description=Network Setup
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/sbin/network-setup.sh
+
+[Install]
+WantedBy=multi-user.target
