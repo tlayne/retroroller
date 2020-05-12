@@ -9,10 +9,9 @@ to contribute to.
 ## Installation
 
 1. Download
-[archlinux-retroroller-20200510.img.gz](http://localhost)
+[archlinux-retroroller-20200511.img.gz](http://localhost)
 2. Flash to sdcard.
-3. On partition 1 (fat32) edit `wpa_supplicant.conf` and fill
-   in `ssid` and `psk` fields. You can add multiple network blocks.
+3. On partition 1 (fat32) edit `network.sh`
 4. Boot in OGA and wait for Emulation Station.
 
 ### Obligatory Disclaimer
