@@ -3,7 +3,7 @@
 _pkgname=emulationstation-go2
 pkgname=emulationstation-odroidgo2
 pkgver=1469.f3f3535
-pkgrel=8
+pkgrel=9
 pkgdesc="Emulation Station is a flexible emulator front-end supporting keyboardless navigation and custom system themes. For odroidgo2."
 arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')
 url="https://github.com/RetroPie/EmulationStation"
@@ -26,7 +26,8 @@ optdepends=(
   'ppsspp-go2: Retroarch32'
   "es-theme-M00DY-AlekFull-Solo-Horizontal: For M00DY Sanchez's theme"
 )
-conflicts=(emulationstation-git)
+conflicts=(emulationstation)
+provides=(emulationstation)
 #options=(!buildflags !makeflags)
 source=(
   "git+https://github.com/OtherCrashOverride/emulationstation-go2"
