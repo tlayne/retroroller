@@ -1,7 +1,7 @@
 # Maintainer: valadaa48 <valadaa48@gmx.com>
 
 pkgname=network-setup
-pkgver=1.0.0
+pkgver=1.0.1
 pkgrel=1
 pkgdesc="Network setup script"
 arch=('aarch64')
@@ -15,7 +15,7 @@ source=(
 backup=(boot/network.sh)
 md5sums=('f8bd24bbd730a33b5008975cfefb1dd3'
          '927b747b79856a8fca4c9148a752b345'
-         'b556c44bb30257f6ebd3d7e79e1b3bb8')
+         'd1154648da859fdaf226d3f0bcc93af3')
 
 package() {
   install -Dm 755 network-setup.sh -t "$pkgdir"/usr/local/sbin
