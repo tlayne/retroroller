@@ -14,6 +14,10 @@ to contribute to.
 3. On partition 1 (fat32) edit `network.sh`
 4. Boot in OGA and wait for Emulation Station.
 
+NOTE: It's highly recommended that you have the ability to ssh in case
+something goes wrong! If you can't then you might be best with a more fully
+managed image.
+
 ### Obligatory Disclaimer
 
 <i>This image is still under heavy development. Some packages include
