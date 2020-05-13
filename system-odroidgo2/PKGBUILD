@@ -2,7 +2,7 @@
 # vim: ft=sh:
 
 pkgname=system-odroidgo2
-pkgver=1.1.4
+pkgver=1.1.5
 pkgrel=1
 pkgdesc="Odroidgo2 system files"
 arch=('aarch64')
@@ -39,7 +39,7 @@ md5sums=('462cd4e44563ebdca4ebf6130311aef8'
          'b28465279bd5b086ed424aa42ba813c9'
          'b31375220c157ad8bf4eacfd3d27d20d'
          'b01abad415ad1e904e5ad2070f9c486a'
-         '64cf0f6e8f98eefbb13fd7c2b4595539'
+         'bd3d0ca803b3bd866c31e689f604b434'
          '3caef40123ef9ec20459cb68d6db48fd')
 
 package() {
