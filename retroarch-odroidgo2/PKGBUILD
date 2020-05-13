@@ -2,8 +2,8 @@
 
 _pkgname=RetroArch
 pkgname=retroarch-odroidgo2
-pkgver=53289.66eed86ccf
-pkgrel=3
+pkgver=53640.6c4c93e17b
+pkgrel=1
 pkgdesc="Retroarch for odroidgo2"
 arch=('aarch64')
 url="https://github.com/libretro/RetroArch"
@@ -16,32 +16,33 @@ depends=(
   glibc
   libass
   libpng
-  libgo2
   libxkbcommon
-  zlib
   librga
   openal
+  zlib
 )
 source=(
-  'git+https://github.com/valadaa48/RetroArch'
+  'git+https://github.com/libretro/RetroArch'
   'retroarch.cfg'
 )
 backup=('etc/retroarch.cfg')
+md5sums=('SKIP'
+         'f361f585a1f4484145ce25baa9f8d7f7')
 
 pkgver() {
-  cd ${srcdir}/${_pkgname}
+  cd "$_pkgname"
   echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
 }
 
 prepare() {
-  cd ${srcdir}/${_pkgname}
+  cd "$_pkgname"
   #    sed -i 's:drm/drm_fourcc.h:libdrm/drm_fourcc.h:' deps/libgo2/src/display.c gfx/drivers/oga_gfx.c
 }
 
 build() {
   export CXXFLAGS="$CXXFLAGS -fno-rtti -std=gnu++11"
 
-  cd ${srcdir}/${_pkgname}
+  cd "$_pkgname"
   ./configure \
     --prefix=/usr \
     --disable-builtinminiupnpc \
@@ -77,10 +78,8 @@ build() {
 }
 
 package() {
-  cd ${srcdir}/${_pkgname}
-  make DESTDIR=${pkgdir} install
-  install -Dm644 ../retroarch.cfg -t ${pkgdir}/etc
+  cd "$_pkgname"
+  make DESTDIR="$pkgdir" install
+  install -Dm644 ../retroarch.cfg -t "$pkgdir"/etc
 }
 
-md5sums=('SKIP'
-         '6f47edb200893ad15ee67bfa4c676c14')
