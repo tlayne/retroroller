@@ -1,8 +1,8 @@
 # Maintainer: valadaa48 <valadaa48@gmx.com>
 
 pkgname=retrolauncher
-pkgver=1.0.6
-pkgrel=4
+pkgver=1.0.7
+pkgrel=2
 pkgdesc="Low resource launcher"
 arch=('any')
 url=https://github.com/valadaa48/retrolauncher
@@ -20,17 +20,17 @@ source=(
     RetroLauncher.sh
     )
 md5sums=('b240977225748b85468cea092d464091'
-    'ef764d95beb4018462ee6d4d7c3de940'
-    '917920ecdc823b328cc920a3d13516e6'
-    'c1dbaa61d7f67a1d621efdf9037c524e')
+         'c3ac9c1adb7ff5f759623a4299468b1e'
+         '917920ecdc823b328cc920a3d13516e6'
+         'c1dbaa61d7f67a1d621efdf9037c524e')
 
 package() {
-  install -d ${pkgdir}/etc/udev/rules.d
-    install -d ${pkgdir}/roms/sh
-    install -d ${pkgdir}/usr/bin
+  install -d "$pkgdir"/etc/udev/rules.d
+    install -d "$pkgdir"/roms/sh
+    install -d "$pkgdir"/usr/bin
 
-    install -m 755 retrolauncher.py ${pkgdir}/usr/bin/retrolauncher
-    install -m 755 RetroLauncher.sh ${pkgdir}/roms/sh
-    install -m 644 20-retrolauncher-uinput.rules ${pkgdir}/etc/udev/rules.d
-    install -D retrolauncher.service -t ${pkgdir}/etc/systemd/system
+    install -m 755 retrolauncher.py "$pkgdir"/usr/bin/retrolauncher
+    install -m 755 RetroLauncher.sh "$pkgdir"/roms/sh
+    install -m 644 20-retrolauncher-uinput.rules "$pkgdir"/etc/udev/rules.d
+    install -Dm755 retrolauncher.service -t "$pkgdir"/etc/systemd/system
 }

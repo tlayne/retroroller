@@ -4,6 +4,7 @@ import threading
 import dialog
 import glob
 import uinput
+import socket
 from evdev import InputDevice, ecodes as e
 from subprocess import Popen, call, PIPE
 from os import path as op
@@ -21,6 +22,15 @@ BUTTON_MAP = {
     e.BTN_TL: uinput.KEY_PAGEUP,
     e.BTN_TR: uinput.KEY_PAGEDOWN,
 }
+
+
+def get_ip_address():
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        return s.getsockname()[0]
+    except:
+        return "No Network"
 
 
 def _input_loop(indev, outdev, ctx):
@@ -47,9 +57,10 @@ def map_kbd(ctx):
 class RetroLauncher(object):
     def __init__(self):
         self.enable_kb = True
+        self.ip = get_ip_address()
 
         self._dialog = dialog.Dialog(dialog="dialog")
-        self._dialog.set_background_title("{:^58s}".format(".-=o=-. Retro Launcher .-=o=-."))
+        self._dialog.set_background_title("{:^58s}".format(f".-=o=-. Retro Launcher ({self.ip}) .-=o=-."))
 
         self._input_thread = map_kbd(self)
 
