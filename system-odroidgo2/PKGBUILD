@@ -2,7 +2,7 @@
 # vim: ft=sh:
 
 pkgname=system-odroidgo2
-pkgver=1.1.5
+pkgver=1.1.6
 pkgrel=1
 pkgdesc="Odroidgo2 system files"
 arch=('aarch64')
@@ -21,6 +21,9 @@ source=(
   10-disable-power.rules
   smb.conf
   odroid_profile.sh
+  zz_BackupConfig.sh
+  zz_RestoreConfig.sh
+  zz_ResetConfig.sh
 )
 backup=(
   usr/lib/systemd/system-sleep/sleep
@@ -40,7 +43,10 @@ md5sums=('462cd4e44563ebdca4ebf6130311aef8'
          'b31375220c157ad8bf4eacfd3d27d20d'
          'b01abad415ad1e904e5ad2070f9c486a'
          'bd3d0ca803b3bd866c31e689f604b434'
-         '3caef40123ef9ec20459cb68d6db48fd')
+         '3caef40123ef9ec20459cb68d6db48fd'
+         '9e71b5a58193e81955da54bc4043ebdd'
+         '1fbb3757f61148045848ee862cacb489'
+         '4244cc74c561db9cb0be14273664a149')
 
 package() {
   install -d "$pkgdir"/etc/polkit-1/rules.d
@@ -64,6 +70,10 @@ package() {
   install -Dm 755 odroid_profile.sh -t "$pkgdir"/etc/profile.d
 
   install -Dm 644 smb.conf -t "$pkgdir"/etc/samba
+
+  install -Dm 755 zz_BackupConfig.sh -t "$pkgdir"/roms/sh
+  install -Dm 755 zz_RestoreConfig.sh -t "$pkgdir"/roms/sh
+  install -Dm 755 zz_ResetConfig.sh -t "$pkgdir"/roms/sh
 
   install -d "$pkgdir"/etc/sudoers.d
   cp 10-wheel "$pkgdir"/etc/sudoers.d
