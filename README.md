@@ -53,6 +53,7 @@ run this image at your own risk!</i>
 | F1 + L1               | Load state            |
 | F1 + R1               | Save state            |
 | F1 + F6               | Exit RetroArch from game |
+| Start + Select        | RetroArch Menu        |
 
 ## General Setup
 
