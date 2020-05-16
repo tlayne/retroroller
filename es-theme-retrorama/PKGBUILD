@@ -1,16 +1,21 @@
 # Maintainer: valadaa48 <valadaa48@gmx.com>
 
 pkgname=es-theme-retrorama
-pkgver=1.1.0
+pkgver=26.77de4bf
 pkgrel=1
 pkgdesc="EmulationStation theme RetroRama from M00DY"
 arch=(any)
 makedepends=(git)
 url=https://github.com/M00DY-DEV/OGA-EmulationStationThemes
 license=('GLPL3')
-source=('RetroRama::git+https://github.com/M00DY-DEV/OGA-EmulationStationThemes')
+source=('es-theme-retrorama::git+https://github.com/M00DY-DEV/OGA-EmulationStationThemes')
 md5sums=('SKIP')
 options=(!strip)
+
+pkgver() {
+  cd ${pkgname}
+  echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
 
 package() {
     mkdir -p ${pkgdir}/etc/emulationstation/themes
