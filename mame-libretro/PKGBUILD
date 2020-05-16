@@ -1,0 +1,29 @@
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+pkgname=mame-libretro
+pkgver=71661.abca8f7ac5
+pkgrel=1
+pkgdesc="MAME - Multiple Arcade Machine Emulator "
+arch=('aarch64')
+url="https://github.com/libretro/mame"
+license=('GPL')
+makedepends=('git')
+source=(
+  'mame-libretro::git+https://github.com/libretro/mame'
+)
+md5sums=('SKIP')
+
+pkgver() {
+  cd ${pkgname}
+  echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd ${pkgname}
+  make -f Makefile.libretro
+}
+
+package() {
+  install -Dm755 ${pkgname}/mame_libretro.so -t ${pkgdir}/usr/share/libretro
+}
+
