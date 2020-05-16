@@ -3,7 +3,7 @@
 _pkgname=RetroArch
 pkgname=retroarch-odroidgo2
 pkgver=53640.6c4c93e17b
-pkgrel=4
+pkgrel=5
 pkgdesc="Retroarch for odroidgo2"
 arch=('aarch64')
 url="https://github.com/libretro/RetroArch"
@@ -27,7 +27,7 @@ source=(
 )
 backup=('etc/retroarch.cfg')
 md5sums=('SKIP'
-         'f0fc3ae39c9a6f15e963d4569b8ae0b5')
+         'eda8dfe7d97dacb4cf0cebfc8a6dea7b')
 
 pkgver() {
   cd "$_pkgname"
