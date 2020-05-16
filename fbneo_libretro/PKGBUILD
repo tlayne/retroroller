@@ -1,0 +1,38 @@
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+_pkgname=FBNeo
+pkgname=fbneo_libretro
+pkgver=8857.e8106ea65
+pkgrel=1
+pkgdesc="FBNeo - We are Team FBNeo. https://neo-source.com"
+arch=('aarch64')
+url="https://github.com/libretro/FBNeo"
+license=('GPL')
+makedepends=('git')
+source=(
+  'git+https://github.com/libretro/FBNeo'
+  'target.patch'
+)
+md5sums=('SKIP'
+         '572a8a4eb950326725d3c4b031a87e7c')
+
+pkgver() {
+  cd ${_pkgname}
+  echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd ${_pkgname}
+  patch -p1 < ../target.patch
+}
+
+build() {
+  cd ${_pkgname}/src/burner/libretro
+  make platform=goadvance V=1 VERBOSE=1 clean
+  make platform=goadvance V=1 VERBOSE=1
+}
+
+package() {
+  install -Dm755 ${_pkgname}/src/burner/libretro/fbneo_libretro.so -t ${pkgdir}/usr/share/libretro
+}
+
