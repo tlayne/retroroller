@@ -1,0 +1,38 @@
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+_pkgname=mame2003-plus-libretro
+pkgname=mame2003plus_libretro
+pkgver=2611.0134c428
+pkgrel=1
+pkgdesc="Updated 2018 version of MAME (0.78) for libretro. with added game support plus many fixes and improvements "
+arch=('aarch64')
+url="https://github.com/libretro/mame2003-plus-libretro"
+license=('GPL')
+makedepends=('git')
+source=(
+  'git+https://github.com/libretro/mame2003-plus-libretro'
+  'target.patch'
+)
+md5sums=('SKIP'
+         '82e179db876c6524a22c8670ac5f79d5')
+
+pkgver() {
+  cd ${_pkgname}
+  echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd ${_pkgname}
+  patch -p1 < ../target.patch
+}
+
+build() {
+  cd ${_pkgname}
+  make platform=goadvance V=1 VERBOSE=1 clean
+  make platform=goadvance V=1 VERBOSE=1
+}
+
+package() {
+  install -Dm755 ${_pkgname}/mame2003_plus_libretro.so -t ${pkgdir}/usr/share/libretro
+}
+

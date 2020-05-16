@@ -1,0 +1,22 @@
+diff --git a/Makefile b/Makefile
+index 69562598..2536691f 100644
+--- a/Makefile
++++ b/Makefile
+@@ -245,6 +245,17 @@ else ifeq ($(platform), android-armv7)
+    AR = arm-linux-androideabi-ar
+    LD = arm-linux-androideabi-gcc
+ 
++else ifeq ($(platform), goadvance)
++   TARGET := $(TARGET_NAME)_libretro.so
++   CFLAGS += -fPIC
++   LDFLAGS += -fPIC -shared -Wl,--version-script=link.T
++   PLATCFLAGS += -march=armv8-a+crc+simd -mtune=cortex-a35 -mcpu=cortex-a35 -O3 -pipe -fno-plt -fdata-sections -ffunction-sections -Wl,--gc-sections -fno-stack-protector -fno-ident -fomit-frame-pointer -fmerge-all-constants -fno-math-errno -Wl,--gc-sections -falign-functions=1 -falign-jumps=1 -falign-loops=1 -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-unroll-loops -fmerge-all-constants -frename-registers -funsafe-math-optimizations -ftree-vectorize
++   CFLAGS += -flto=16 -fuse-linker-plugin
++   CXXFLAGS += $(CFLAGS) -fno-rtti -fno-exceptions
++   LDFLAGS += -flto=16 -fuse-linker-plugin
++   CPU_ARCH := arm64
++   HIDE :=
++
+ else ifeq ($(platform), qnx)
+    TARGET = $(TARGET_NAME)_libretro_$(platform).so
+    CFLAGS += -fPIC
