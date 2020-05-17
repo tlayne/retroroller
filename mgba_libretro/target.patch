@@ -1,0 +1,21 @@
+diff --git a/Makefile.libretro b/Makefile.libretro
+index fd2a981b..20043f42 100644
+--- a/Makefile.libretro
++++ b/Makefile.libretro
+@@ -163,6 +163,16 @@ else ifeq ($(platform), classic_armv8_a35)
+ 	LDFLAGS += -static-libgcc -static-libstdc++
+ #######################################
+ 
++else ifeq ($(platform), goadvance)
++	TARGET := $(TARGET_NAME)_libretro.so
++	fpic = -fPIC
++	SHARED := -shared -Wl,--version-script=link.T -Wl,--no-undefined
++	CFLAGS += -march=armv8-a+crc+simd -mtune=cortex-a35 -mcpu=cortex-a35 -O3 -pipe -fno-plt -fdata-sections -ffunction-sections -Wl,--gc-sections -fno-stack-protector -fno-ident -fomit-frame-pointer -fmerge-all-constants -fno-math-errno -Wl,--gc-sections -falign-functions=1 -falign-jumps=1 -falign-loops=1 -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-unroll-loops -fmerge-all-constants -frename-registers -funsafe-math-optimizations -ftree-vectorize -flto=16 -fuse-linker-plugin
++	CFLAGS += -std=c99 -D_GNU_SOURCE -DHAVE_LOCALE
++	CXXFLAGS += $(CFLAGS) -fno-rtti -fno-exceptions
++	ASFLAGS += $(CFLAGS) -c
++   LDFLAGS += -flto=16 -fuse-linker-plugin  
++
+ # OS X
+ else ifeq ($(platform), osx)
+    TARGET := $(TARGET_NAME)_libretro.dylib

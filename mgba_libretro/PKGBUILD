@@ -1,0 +1,37 @@
+# Maintainer: valadaa48
+
+pkgname=mgba_libretro
+pkgver=6701.02879f8e
+pkgrel=1
+pkgdesc="mGBA Game Boy Advance Emulator https://mgba.io/"
+arch=('aarch64')
+url="https://github.com/libretro/mgba"
+license=('GPL')
+makedepends=('git')
+source=(
+  'mgba_libretro::git+https://github.com/libretro/mgba'
+  'target.patch'
+)
+md5sums=('SKIP'
+         'f650c11cbb60b5a4b63540b6a63cfcfc')
+
+pkgver() {
+  cd ${pkgname}
+  echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd ${pkgname}
+  patch -p1 < ../target.patch
+}
+
+build() {
+  cd ${pkgname}
+  make platform=goadvance V=1 VERBOSE=1 clean
+  make platform=goadvance V=1 VERBOSE=1
+}
+
+package() {
+  install -Dm755 ${pkgname}/${pkgname}.so -t ${pkgdir}/usr/share/libretro
+}
+
