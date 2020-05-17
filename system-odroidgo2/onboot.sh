@@ -9,6 +9,8 @@ if [ -f /boot/wpa_supplicant.conf ]; then
 	chmod 644 /etc/wpa_supplicant/wpa_supplicant.conf
 fi
 
+/usr/bin/performance off
+
 iw dev wlan0 set power_save off
 
 echo 0 > /proc/sys/kernel/nmi_watchdog

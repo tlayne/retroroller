@@ -6,17 +6,17 @@ cpu=/sys/devices/system/cpu/cpufreq/policy0/scaling_governor
 
 dmc_default="dmc_ondemand"
 gpu_default="simple_ondemand"
-cpu_default="ondemand"
+cpu_default="interactive"
 performance="performance"
 
 case $1 in 
 	on)
-#		echo $performance > $cpu
+		echo $performance > $cpu
 		echo $performance > $dmc
 		echo $performance > $gpu
 		;;
 	off)
-#		echo $cpu_default > $cpu
+		echo $cpu_default > $cpu
 		echo $dmc_default > $dmc
 		echo $gpu_default > $gpu
 		;;
