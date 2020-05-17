@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
 if [[ -x "/boot/network.sh" ]]; then
-    /boot/network.sh
+    sudo -u odroid /boot/network.sh
 fi
 

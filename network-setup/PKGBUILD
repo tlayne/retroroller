@@ -1,7 +1,7 @@
 # Maintainer: valadaa48 <valadaa48@gmx.com>
 
 pkgname=network-setup
-pkgver=1.0.1
+pkgver=1.0.2
 pkgrel=1
 pkgdesc="Network setup script"
 arch=('aarch64')
@@ -14,7 +14,7 @@ source=(
 )
 backup=(boot/network.sh)
 md5sums=('f8bd24bbd730a33b5008975cfefb1dd3'
-         '927b747b79856a8fca4c9148a752b345'
+         '78fc3b004cc7e275cce97041673ff604'
          'd1154648da859fdaf226d3f0bcc93af3')
 
 package() {
