@@ -151,12 +151,13 @@ my kernel package after he's acquired an OGA himself for testing.
 
 ## Credits
 
-- NOirBRight and npaladin2000 for testing and feedback
+- npaladin2000 for development
+- NOirBRight for testing and feedback
 - M00D\_Sanchez for the artwork
 - Christian\_Haitian for debugging wifi issues
 - Safarikniv for testing and hosting the RetroArch cores
 - CrashOverride for all the dev work he's done on the platform
 - Lakka and EmuELEC team for all the collaboration
-- All the fans in #odroidgo-advance including BadBrent
+- All the fans in #oga-all-versions including BadBrent
 
 [//]: # vim: set textwidth=80:
