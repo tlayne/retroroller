@@ -8,7 +8,7 @@ _srcname=linux
 _kernelname=${pkgbase#linux}
 _desc="ODROID-GO2"
 pkgver=4.4.189
-pkgrel=8
+pkgrel=9
 arch=('aarch64')
 url="https://github.com/hardkernel/linux/tree/odroidgoA-4.4.y"
 license=('GPL2')
@@ -23,7 +23,7 @@ source=("git+https://github.com/hardkernel/linux#branch=odroidgoA-4.4.y"
         'gcc9.patch'
         'joypad.patch')
 md5sums=('SKIP'
-         'cf802159adbecbc63d36277246818e60'
+         'e0ccc60583a5327437cfb022af2a0553'
          '86d4a35722b5410e3b29fc92dae15d4b'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'
          '3dc88030a8f2f5a5f97266d99b149f77'
