@@ -1,0 +1,86 @@
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+pkgname=batocera-emulationstation
+pkgver=3469.eb186964
+pkgrel=4
+pkgdesc="Emulation Station is a flexible emulator front-end supporting keyboardless navigation and custom system themes. Batocera edition."
+arch=(any)
+url="https://github.com/batocera-linux/batocera-emulationstation"
+license=('MIT')
+depends=(
+  vlc
+  alsa-lib
+  curl
+  sdl2
+  freeimage
+  rapidjson
+  libgo2
+  sdl2_mixer
+  emulationstation-odroidgo2
+)
+#options=(debug)
+makedepends=('cmake' 'curl' 'git')
+optdepends=(
+  'ttf-droid: Fallback fonts for Chinese/Japanese/Korean characters'
+  'retroarch-odroigo2: Retroarch'
+  'retroarch32-odroigo2: Retroarch32'
+  'ppsspp-go2: Retroarch32'
+  "es-theme-M00DY-AlekFull-Solo-Horizontal: For M00DY Sanchez's theme"
+)
+#provides=(emulationstation)
+#conflicts=(emulationstation)
+source=(
+  "git+https://github.com/valadaa48/batocera-emulationstation"
+  "emulationstation.service"
+  "emulationstation.sh"
+  "es_systems.cfg"
+  "es_input.cfg"
+  "batocera-wifi"
+  "batocera.conf"
+  "BatoceraES.sh"
+)
+md5sums=('SKIP'
+         '1e68d88fdd5292f2361b36043810504c'
+         '6b63f81b12358301c1b8b7d63de7944b'
+         '83b838e044371f86be8dc6ab54865359'
+         'c769bdd58cab9bc729eda2e0ac1db10d'
+         '9ba1a13588f6c9b2fd3a752f724e2d2c'
+         'f15aa0ea0ba9715a93a036bf1aa10cfd'
+         'ba6022e616c5241e1ceee1a8a540c8de')
+
+pkgver() {
+  cd ${pkgname}
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  cd ${pkgname}
+  git submodule update --init --recursive
+}
+
+build() {
+  cd ${pkgname}
+  export CFLAGS=""
+  export CXXFLAGS=""
+  export LDFLAGS=""
+  cmake . -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS="-L/usr/lib/mali-egl -lGLESv2" -DUSE_GLES=on -DGL=off -DRPI=off -DCEC=off -Wno-dev
+  make -j17 V=1 VERBOSE=1
+}
+
+package() {
+  install -Dm755 "$pkgname/emulationstation" -t "$pkgdir/opt/batocera-emulationstation"
+
+  install -d "$pkgdir/usr/share/emulationstation"
+  cp -rv $pkgname/resources $pkgdir/usr/share/emulationstation
+
+  install -Dm644 "$pkgname/LICENSE.md" "$pkgdir/usr/share/licenses/batocera-emulationstation/LICENSE"
+
+  install -Dm755 emulationstation.sh $pkgdir/usr/bin/batocera-emulationstation
+  install -Dm755 emulationstation.service $pkgdir/etc/systemd/system/batocera-emulationstation.service
+
+  install -Dm755 batocera-wifi -t "$pkgdir"/usr/bin
+  install -Dm644 batocera.conf -t "$pkgdir"/userdata/system
+
+  install -Dm755 BatoceraES.sh -t "$pkgdir"/roms/sh
+}
+
