@@ -3,7 +3,7 @@
 _pkgname=emulationstation-go2
 pkgname=emulationstation-odroidgo2
 pkgver=1471.8026560
-pkgrel=4
+pkgrel=5
 pkgdesc="Emulation Station is a flexible emulator front-end supporting keyboardless navigation and custom system themes. For odroidgo2."
 arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')
 url="https://github.com/RetroPie/EmulationStation"
@@ -36,14 +36,15 @@ source=(
   "es_systems.cfg"
   "es_input.cfg"
   "EmulationStation.sh"
-#  "splash.svg"
+  "splash.svg"
 )
 md5sums=('SKIP'
          '1e68d88fdd5292f2361b36043810504c'
          '9eff990109e3b9d58b891e5676c8dc9d'
-         '4b13c1a297c7fa701541a4a463198589'
-         'c769bdd58cab9bc729eda2e0ac1db10d'
-         '99844eee146d7a7e355c4f8509f54735')
+         '1b6635b123497b8f917a00dcda85aecf'
+         '3d9016ed6bc777dd5521b550b8af17d8'
+         '99844eee146d7a7e355c4f8509f54735'
+         '613d51514376d4aa1cc968575120e084')
 
 pkgver() {
   cd ${srcdir}/${_pkgname}
@@ -79,6 +80,6 @@ package() {
   install -Dm644 es_input.cfg -t $pkgdir/etc
 
 
-#  install -Dm644 splash.svg -t "$pkgdir"/opt/emulationstation/resources
+  install -Dm644 splash.svg -t "$pkgdir"/opt/emulationstation/resources
 }
 
