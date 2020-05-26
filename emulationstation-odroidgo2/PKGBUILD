@@ -16,6 +16,7 @@ depends=(
   freeimage
   rapidjson
   libgo2
+  adobe-source-code-pro-fonts
 )
 #'vlc' 'alsa-lib' 'sdl2' 'boost-libs' 'freeimage' 'curl' 'libraw' 'libcec')
 makedepends=('cmake' 'curl' 'git')
