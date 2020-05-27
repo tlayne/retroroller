@@ -42,8 +42,8 @@ mkdir -p /roms/sega32x/
 mkdir -p /roms/gamegear/
 mkdir -p /roms/ngp/
 mkdir -p /roms/ngpc/
-mkdir -p /roms/tg16cd</path>
-mkdir -p /roms/tg16</path>
+mkdir -p /roms/tg16cd/
+mkdir -p /roms/tg16/
 mkdir -p /roms/pcengine/
 mkdir -p /roms/pcenginecd/
 mkdir -p /roms/supergrafx/
