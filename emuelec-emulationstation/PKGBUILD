@@ -1,7 +1,8 @@
 # Maintainer: valadaa48 <valadaa48@gmx.com>
 
+_pkgname=emulationstation
 pkgname=emuelec-emulationstation
-pkgver=3510.bd8040ed
+pkgver=3512.c9a40b35
 pkgrel=1
 pkgdesc="Emulation Station is a flexible emulator front-end supporting keyboardless navigation and custom system themes. EmuELEC edition."
 arch=(any)
@@ -16,63 +17,68 @@ depends=(
   rapidjson
   libgo2
   sdl2_mixer
-#  emulationstation-odroidgo2
 )
-#options=(debug)
 makedepends=('cmake' 'curl' 'git')
-optdepends=(
-  'ttf-droid: Fallback fonts for Chinese/Japanese/Korean characters'
-  'retroarch-odroigo2: Retroarch'
-  'retroarch32-odroigo2: Retroarch32'
-  'ppsspp-go2: Retroarch32'
-  "es-theme-M00DY-AlekFull-Solo-Horizontal: For M00DY Sanchez's theme"
-)
-#provides=(emulationstation)
-#conflicts=(emulationstation)
+provides=(emulationstation)
+conflicts=(emulationstation)
 source=(
-  "git+https://github.com/valadaa48/batocera-emulationstation#branch=rr"
+  "emulationstation::git+https://github.com/valadaa48/batocera-emulationstation#branch=rr"
+  "git+https://github.com/valadaa48/EmuELEC#branch=rr"
   "emulationstation.service"
+  "emulationstation.sh"
   "es_systems.cfg"
-  "es_input.cfg"
   "emuelec-emulationstation-oga-fixes.patch"
+  "ee_arch"
 )
 md5sums=('SKIP'
-         '1e68d88fdd5292f2361b36043810504c'
-         '30aa0fb845ba98f5e3778b3baa65630b'
-         'e1410f1f347a0d26bcbf5c94ae2874f4')
+         'SKIP'
+         'fee7fc2a4d632449be3518fdac78b68a'
+         '618526cc9da2b97658a123c382de2aac'
+         '1b6635b123497b8f917a00dcda85aecf'
+         'e1410f1f347a0d26bcbf5c94ae2874f4'
+         '34c2ed37d953249adb58c4cc96738877')
 
 pkgver() {
-  cd ${pkgname}
+  cd ${_pkgname}
   echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
 }
 
 prepare() {
-  cd ${pkgname}
+  cd ${_pkgname}
   git submodule update --init --recursive
   patch -p1 < ../emuelec-emulationstation-oga-fixes.patch
 }
 
 build() {
-  cd ${pkgname}
+  cd ${_pkgname}
   export CFLAGS=""
   export CXXFLAGS=""
   export LDFLAGS=""
-  #-DENABLE_EMUELEC=1 -DDISABLE_KODI=1 -DENABLE_FILEMANAGER=1"
   cmake . -DDISABLE_KODI=1 -DGLES=1 -DENABLE_EMUELEC=1 -DENABLE_FILEMANAGER=1 -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXE_LINKER_FLAGS="-L/usr/lib/mali-egl -lGLESv2" -DUSE_GLES=on -DGL=off -DRPI=off -DCEC=off
-  #cmake . -DDISABLE_KODI=1 -DGLES=1 -DENABLE_EMUELEC=1 -DENABLE_FILEMANAGER=1 -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXE_LINKER_FLAGS="-L/usr/lib/mali-egl -lGLESv2" -DUSE_GLES=on -DGL=off -DRPI=off -DCEC=off
   make -j17 V=1 VERBOSE=1
 }
 
 package() {
-  install -Dm755 "$pkgname/emulationstation" -t "$pkgdir/usr/bin/emulationstation"
+  install -Dm755 "$_pkgname/emulationstation" -t "$pkgdir/opt/emulationstation/"
 
-#  install -d "$pkgdir/usr/share/emulationstation"
-  #cp -rv $pkgname/resources $pkgdir/usr/share/emulationstation
+  cp -r "$_pkgname/resources" "$pkgdir/opt/emulationstation/"
 
 #  install -Dm644 "$pkgname/LICENSE.md" "$pkgdir/usr/share/licenses/batocera-emulationstation/LICENSE"
 
-#  install -Dm755 emulationstation.sh $pkgdir/usr/bin/emulationstation
-  install -Dm755 emulationstation.service $pkgdir/etc/systemd/system/emulationstation.service
+  install -Dm755 emulationstation.sh $pkgdir/usr/bin/emulationstation
+  install -Dm755 emulationstation.service "$pkgdir/etc/systemd/system/emulationstation.service"
+
+  install -d "$pkgdir"/home/odroid/.emulationstation
+  cp -r EmuELEC/packages/sx05re/emuelec/config/emulationstation/scripts "$pkgdir"/home/odroid/.emulationstation/
+
+  install -d "$pkgdir"/usr/bin
+  cp EmuELEC/packages/sx05re/emuelec/config/emuelec/scripts/batocera/* "$pkgdir"/usr/bin
+  chmod 755 "$pkgdir"/usr/bin/*
+  
+  install -m644 ee_arch "$pkgdir"/ee_arch
+
+#  install -d "$pkgdir"/home/odroid/.config/emuelec/scripts/batocera/batocera-settings
+#  cp -rv 
 
 #  install -Dm755 batocera-wifi -t "$pkgdir"/usr/bin
 #  install -Dm644 batocera.conf -t "$pkgdir"/userdata/system
