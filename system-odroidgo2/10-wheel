@@ -1,2 +1,2 @@
 %wheel ALL=(ALL) ALL
-%wheel ALL=(root) NOPASSWD: /usr/bin/pacman, /usr/bin/chvt
+%wheel ALL=(root) NOPASSWD: /usr/bin/pacman, /usr/bin/chvt, /usr/bin/systemctl, /usr/bin/mount, /usr/bin/umount
