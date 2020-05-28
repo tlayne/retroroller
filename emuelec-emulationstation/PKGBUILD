@@ -2,7 +2,7 @@
 
 _pkgname=emulationstation
 pkgname=emuelec-emulationstation
-pkgver=3512.c9a40b35
+pkgver=3518.2951c9e5
 pkgrel=1
 pkgdesc="Emulation Station is a flexible emulator front-end supporting keyboardless navigation and custom system themes. EmuELEC edition."
 arch=(any)
@@ -17,6 +17,7 @@ depends=(
   rapidjson
   libgo2
   sdl2_mixer
+  es-theme-emuelec-carbon
 )
 makedepends=('cmake' 'curl' 'git')
 provides=(emulationstation)
@@ -54,7 +55,7 @@ build() {
   export CFLAGS=""
   export CXXFLAGS=""
   export LDFLAGS=""
-  cmake . -DDISABLE_KODI=1 -DGLES=1 -DENABLE_EMUELEC=1 -DENABLE_FILEMANAGER=1 -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXE_LINKER_FLAGS="-L/usr/lib/mali-egl -lGLESv2" -DUSE_GLES=on -DGL=off -DRPI=off -DCEC=off
+  cmake . -DCMAKE_BUILD_TYPE=Release -DDISABLE_KODI=1 -DGLES=1 -DENABLE_EMUELEC=1 -DENABLE_FILEMANAGER=1 -DCMAKE_EXE_LINKER_FLAGS="-L/usr/lib/mali-egl -lGLESv2" -DUSE_GLES=on -DGL=off -DRPI=off -DCEC=off
   make -j17 V=1 VERBOSE=1
 }
 
@@ -63,7 +64,7 @@ package() {
 
   cp -r "$_pkgname/resources" "$pkgdir/opt/emulationstation/"
 
-#  install -Dm644 "$pkgname/LICENSE.md" "$pkgdir/usr/share/licenses/batocera-emulationstation/LICENSE"
+  install -Dm644 "$_pkgname/LICENSE.md" "$pkgdir/usr/share/licenses/emuelec-emulationstation/LICENSE"
 
   install -Dm755 emulationstation.sh $pkgdir/usr/bin/emulationstation
   install -Dm755 emulationstation.service "$pkgdir/etc/systemd/system/emulationstation.service"
@@ -77,12 +78,12 @@ package() {
   
   install -m644 ee_arch "$pkgdir"/ee_arch
 
+  install -d "$pkgdir"/storage/.config
+  cp -r EmuELEC/packages/sx05re/emuelec/config/emuelec "$pkgdir"/storage/.config
+
+  chown -R odroid:odroid "$pkgdir"/storage
+
 #  install -d "$pkgdir"/home/odroid/.config/emuelec/scripts/batocera/batocera-settings
 #  cp -rv 
-
-#  install -Dm755 batocera-wifi -t "$pkgdir"/usr/bin
-#  install -Dm644 batocera.conf -t "$pkgdir"/userdata/system
-
-#  install -Dm755 BatoceraES.sh -t "$pkgdir"/roms/sh
 }
 
