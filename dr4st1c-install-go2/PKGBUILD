@@ -18,6 +18,9 @@ source=(
   drastic.cfg
   drastic.cf2
 )
+md5sums=('915bb40b9aa24b357a83d56c1a7b132f'
+         'd263c7b803fa2a15d029fb191d101803'
+         '3128c9aa22733487ceb9413c871c5672')
 
 package() {
     install -Dm 755 install_Dr4st1c.sh -t "$pkgdir"/roms/sh
