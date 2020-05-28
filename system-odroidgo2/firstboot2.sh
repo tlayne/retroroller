@@ -2,10 +2,7 @@
 
 ln -s /home/odroid/.emulationstation/themes/ /home/odroid/themes
 ln -s /home/odroid/.config/retroarch/bios /home/odroid/bios
-mkdir -p /var/lib/alsa
-chmod 755 /var/lib/alsa
-amixer set 'Playback Path' 'SPK'
-alsactl store
+
 mkdir -p /roms/arcade/
 mkdir -p /roms/dreamcast/
 mkdir -p /roms/atomiswave/
@@ -62,5 +59,12 @@ mkdir -p /roms/coleco/
 mkdir -p /roms/scummvm/
 mkdir -p /roms/c64/
 chown -R odroid:odroid /roms
-chmod -R 755 /roms
+chmod -R 644 /roms
+chmod -R 755 /roms/sh
+
+mkdir -p /var/lib/alsa
+chmod 755 /var/lib/alsa
+amixer set 'Playback Path' 'SPK'
+alsactl store
+
 exit 0
