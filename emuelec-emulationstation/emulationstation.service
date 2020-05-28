@@ -9,6 +9,7 @@ StandardInput=tty-force
 TTYVHangup=yes
 TTYPath=/dev/tty3
 TTYReset=yes
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
