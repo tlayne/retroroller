@@ -2,7 +2,7 @@
 
 _pkgname=emulationstation
 pkgname=emuelec-emulationstation
-pkgver=3518.2951c9e5
+pkgver=3522.9885cb53
 pkgrel=1
 pkgdesc="Emulation Station is a flexible emulator front-end supporting keyboardless navigation and custom system themes. EmuELEC edition."
 arch=(any)
@@ -27,17 +27,14 @@ source=(
   "git+https://github.com/valadaa48/EmuELEC#branch=rr"
   "emulationstation.service"
   "emulationstation.sh"
-  "es_systems.cfg"
-  "emuelec-emulationstation-oga-fixes.patch"
   "ee_arch"
 )
 md5sums=('SKIP'
          'SKIP'
          'fee7fc2a4d632449be3518fdac78b68a'
          '618526cc9da2b97658a123c382de2aac'
-         '1b6635b123497b8f917a00dcda85aecf'
-         'e1410f1f347a0d26bcbf5c94ae2874f4'
          '34c2ed37d953249adb58c4cc96738877')
+#options=(!buildflags)
 
 pkgver() {
   cd ${_pkgname}
@@ -47,7 +44,6 @@ pkgver() {
 prepare() {
   cd ${_pkgname}
   git submodule update --init --recursive
-  patch -p1 < ../emuelec-emulationstation-oga-fixes.patch
 }
 
 build() {
