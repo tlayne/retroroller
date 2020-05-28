@@ -1,7 +1,7 @@
 # Maintainer: valadaa48 <valadaa48@gmx.com>
 
 pkgname=es-theme-minimal
-pkgver=28.e8c3958
+pkgver=33.23fdda4
 pkgrel=1
   pkgdesc="EmulationStation theme OGA Minimal from tlayne"
   arch=(any)
