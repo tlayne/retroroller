@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+mkdir -p /home/odroid/.emulationstation/themes/
+chown -R odroid:odroid /roms
+chmod -R 755 /roms
 ln -s /home/odroid/.emulationstation/themes/ /home/odroid/themes
 ln -s /home/odroid/.config/retroarch/bios /home/odroid/bios
 
