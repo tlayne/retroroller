@@ -24,6 +24,7 @@ md5sums=('915bb40b9aa24b357a83d56c1a7b132f'
 
 package() {
     install -Dm 755 install_Dr4st1c.sh -t "$pkgdir"/roms/sh
+    install -Dm 755 drastic.sh -t "$pkgdir"/usr/bin/drastic
     install -Dm 644 drastic.cfg -t $pkgdir/home/odroid/drastic/config
     install -Dm 644 drastic.cf2 -t $pkgdir/home/odroid/drastic/config
     chown -R odroid:odroid $pkgdir/home/odroid/drastic/
