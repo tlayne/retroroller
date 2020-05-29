@@ -59,8 +59,7 @@ mkdir -p /roms/coleco/
 mkdir -p /roms/scummvm/
 mkdir -p /roms/c64/
 chown -R odroid:odroid /roms
-chmod -R 644 /roms
-chmod -R 755 /roms/sh
+chmod -R 755 /roms
 
 mkdir -p /var/lib/alsa
 chmod 755 /var/lib/alsa
