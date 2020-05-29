@@ -61,6 +61,7 @@ mkdir -p /roms/dos/
 mkdir -p /roms/coleco/
 mkdir -p /roms/scummvm/
 mkdir -p /roms/c64/
+mkdir -p /roms/pokemini/
 chown -R odroid:odroid /roms
 chmod -R 755 /roms
 
