@@ -1,8 +1,8 @@
-# Maintainer: valadaa48
+# Maintainer: valadaa48 <valadaa48@gmx.com>
 
 pkgname=oga-events
-pkgver=1.0.1
-pkgrel=2
+pkgver=1.2.0
+pkgrel=1
 pkgdesc="OGA global events"
 arch=('aarch64')
 url=https://github.com/valadaa48
@@ -12,9 +12,11 @@ source=(
     'oga-events'
     'oga-events.service'
 )
-md5sums=('SKIP' 'SKIP')
+md5sums=('5575476265277e41817029c7d0a15897'
+         'ace29e4b39f3dc19825825c214110532')
+install=oga-events.install
 
 package() {
 	install -Dm755 oga-events -t ${pkgdir}/usr/bin
-	install -Dm755 oga-events.service -t ${pkgdir}/etc/systemd/system
+	install -Dm755 oga-events.service -t ${pkgdir}/usr/lib/systemd/system
 }

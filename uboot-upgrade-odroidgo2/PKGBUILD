@@ -1,0 +1,23 @@
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+pkgname=uboot-upgrade-odroidgo2
+pkgver=e7b255
+pkgrel=2
+epoch=1
+pkgdesc="uboot upgrader"
+arch=('aarch64')
+url=https://github.com/valadaa48
+license=('GPL2')
+source=(
+  'uboot-upgrade.sh'
+  'images.tgz'
+)
+md5sums=('1e6690fdc59098dae890645853540c5a'
+         '741f04cc068181ae3012c2e2753190bf')
+
+package() {
+	install -Dm755 uboot-upgrade.sh ${pkgdir}/usr/local/sbin/uboot-upgrade
+	install -Dm644 idbloader.img -t ${pkgdir}/usr/share/uboot-upgrade
+	install -Dm644 trust.img -t ${pkgdir}/usr/share/uboot-upgrade
+	install -Dm644 uboot.img -t ${pkgdir}/usr/share/uboot-upgrade
+}

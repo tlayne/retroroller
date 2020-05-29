@@ -2,7 +2,7 @@
 # vim: ft=sh:
 
 pkgname=system-odroidgo2
-pkgver=1.1.7
+pkgver=1.3.0
 pkgrel=1
 pkgdesc="Odroidgo2 system files"
 arch=('aarch64')
@@ -32,11 +32,11 @@ backup=(
   etc/samba/smb.conf
 )
 md5sums=('462cd4e44563ebdca4ebf6130311aef8'
-         'df08909ec5cf51858233eba4965a3435'
+         '2e0a6cd97221136b1782a7e5f0f99220'
          '2f0d3ab537798256e4fc6ccf938772dc'
          'db8d26383a8bbfa19604e6b1c09bda3a'
          '94149723729db59cd3971af1eabf3f04'
-         'c55b4240d34e98a600313f9619232bc2'
+         'f72b75eb837cdd00fb333ad1ec4ae235'
          '439fa94c8fcab8ddd10c95c77a913887'
          '93cba8e45009b252ce4d59c5aa0b9a74'
          'b28465279bd5b086ed424aa42ba813c9'
@@ -75,7 +75,7 @@ package() {
   install -Dm 755 zz_RestoreConfig.sh -t "$pkgdir"/roms/sh
   install -Dm 755 zz_ResetConfig.sh -t "$pkgdir"/roms/sh
 
-  install -d "$pkgdir"/etc/sudoers.d
-  cp 10-wheel "$pkgdir"/etc/sudoers.d
+  install -Dm 755 10-wheel -t "$pkgdir"/etc/sudoers.d
+  chmod 750 "$pkgdir"/etc/sudoers.d
   chmod 440 "$pkgdir"/etc/sudoers.d/10-wheel
 }

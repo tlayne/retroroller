@@ -1,0 +1,39 @@
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+_pkgname=dosbox-core
+pkgname=dosbox_core_libretro
+pkgver=4480.9a773c38
+pkgrel=1
+pkgdesc="Mirror of DOSBox-core. For downloads, PRs and bug reports, use realnc/dosbox-core"
+arch=('aarch64')
+url="https://github.com/libretro/dosbox-core"
+license=('GPL')
+makedepends=('git')
+options=(!buildflags)
+source=(
+  'git+https://github.com/libretro/dosbox-core'
+  'target.patch'
+)
+md5sums=('SKIP'
+         '616ad0c13b63114aa5240332d54c3c80')
+
+pkgver() {
+  cd ${_pkgname}
+  echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd ${_pkgname}
+  patch -p1 < ../target.patch
+}
+
+build() {
+  cd ${_pkgname}/libretro
+  git submodule update --init
+  make platform=goadvance
+}
+
+package() {
+  install -Dm755 ${_pkgname}/libretro/"${pkgname}.so" -t ${pkgdir}/usr/share/libretro
+}
+

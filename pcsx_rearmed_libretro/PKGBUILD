@@ -1,0 +1,37 @@
+# Maintainer: valadaa48
+
+pkgname=pcsx_rearmed_libretro
+pkgver=1703.6673bd8
+pkgrel=1
+pkgdesc="ARM optimized PCSX fork"
+arch=('aarch64')
+url="https://github.com/libretro/pcsx_rearmed"
+license=('GPL')
+makedepends=('git')
+source=(
+  'pcsx_rearmed_libretro::git+https://github.com/valadaa48/pcsx_rearmed'
+)
+md5sums=(
+  'SKIP'
+)
+
+pkgver() {
+  cd ${pkgname}
+  echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd ${pkgname}
+}
+
+build() {
+  cd ${pkgname}
+  make platform=goadvance V=1 VERBOSE=1 clean
+  make platform=goadvance V=1 VERBOSE=1
+}
+
+package() {
+  install -d ${pkgdir}/usr/share/libretro
+  install ${pkgname}/${pkgname}.so ${pkgdir}/usr/share/libretro
+}
+

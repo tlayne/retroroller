@@ -1,25 +1,24 @@
 # Maintainer: valadaa48 <valadaa48@gmx.com>
 
 pkgname=es-theme-minimal
-pkgver=26.77de4bf
+pkgver=33.23fdda4
 pkgrel=1
-pkgdesc="EmulationStation theme OGA Minimal from tlayne"
-arch=(any)
+  pkgdesc="EmulationStation theme OGA Minimal from tlayne"
+  arch=(any)
 makedepends=(git)
-url=https://github.com/tlayne/es-theme-minimal
-license=('GLPL3')
-source=('es-theme-minimal::git+https://github.com/tlayne/es-theme-minimal')
-md5sums=('SKIP')
+  url=https://github.com/tlayne/es-theme-minimal
+  license=('GLPL3')
+  source=('es-theme-minimal::git+https://github.com/tlayne/es-theme-minimal')
+  md5sums=('SKIP')
 options=(!strip)
 
-pkgver() {
-  cd ${pkgname}
-  echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
-}
+  pkgver() {
+    cd ${pkgname}
+    echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+  }
 
 package() {
-    mkdir -p ${pkgdir}/etc/emulationstation/themes
-    install -dm755 $pkgdir/etc/emulationstation/themes
-    cp -rv Minimal/Minimal ${pkgdir}/etc/emulationstation/themes/
-    chmod -R 755 ${pkgdir}/etc/emulationstation/themes/Minimal
+  cd ${pkgname}
+  install -dm755 $pkgdir/etc/emulationstation/themes
+  cp -rv Minimal ${pkgdir}/etc/emulationstation/themes/
 }

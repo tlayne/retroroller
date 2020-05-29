@@ -1,0 +1,15 @@
+[Unit]
+Description=Emulation Station EmuELEC
+
+[Service]
+Type=simple
+User=odroid
+ExecStart=/usr/bin/emulationstation
+StandardInput=tty-force
+TTYVHangup=yes
+TTYPath=/dev/tty1
+TTYReset=yes
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
