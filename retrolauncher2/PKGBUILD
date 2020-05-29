@@ -3,7 +3,7 @@
 _pkgname=retrolauncher
 pkgname=retrolauncher2
 pkgver=0.1.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Low resource launcher2"
 arch=('any')
 url=https://github.com/valadaa48/retrolauncher2
@@ -47,4 +47,7 @@ package() {
   install -Dm 755 retrolauncher.service -t "${pkgdir}"/etc/systemd/system
   install -Dm 755 RetroLauncher.sh -t "$pkgdir"/roms/sh
   install -Dm 644 20-retrolauncher-uinput.rules -t "$pkgdir"/etc/udev/rules.d
+
+  install -dm 755 "${pkgdir}"/usr/share/retrolauncher
+  install -Dm 644 ${pkgname}/retrolauncher/config/retrolauncher.toml -t "${pkgdir}"/usr/share/retrolauncher
 }
