@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+mkdir -p /home/odroid/.emulationstation/themes/
+chown -R odroid:odroid /roms
+chmod -R 755 /roms
 ln -s /home/odroid/.emulationstation/themes/ /home/odroid/themes
 ln -s /home/odroid/.config/retroarch/bios /home/odroid/bios
 
@@ -58,9 +61,9 @@ mkdir -p /roms/dos/
 mkdir -p /roms/coleco/
 mkdir -p /roms/scummvm/
 mkdir -p /roms/c64/
+mkdir -p /roms/pokemini/
 chown -R odroid:odroid /roms
-chmod -R 644 /roms
-chmod -R 755 /roms/sh
+chmod -R 755 /roms
 
 mkdir -p /var/lib/alsa
 chmod 755 /var/lib/alsa
