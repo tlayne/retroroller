@@ -5,7 +5,7 @@ pkgbase=linux-rr-odroid-go2
 _kernelname=${pkgbase#linux}
 _desc="ODROID-GO2 RR"
 pkgver=4.4.189
-pkgrel=2
+pkgrel=4
 arch=('aarch64')
 url="https://github.com/hardkernel/linux/tree/odroidgoA-4.4.y"
 license=('GPL2')
@@ -50,6 +50,7 @@ prepare() {
   patch -p1 < ../5002_block-introduce-the-BFQ-v7r11-I-O-sched-for-4.7.patch1
   patch -p1 < ../5003_block-bfq-add-Early-Queue-Merge-EQM-to-BFQ-v7r11-for-4.7.patch
   patch -p1 < ../5004_blkck-bfq-turn-BFQ-v7r11-for-4.7.0-into-BFQ-v8r3-for-4.patch1
+  patch -p1 < ../joypad.patch
 }
 
 build() {
