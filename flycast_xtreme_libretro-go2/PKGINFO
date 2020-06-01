@@ -12,6 +12,8 @@ source=(retrorun32
 
 package() {
     install -Dm 755 retrorun32 -t "$pkgdir"/usr/bin
-    install -Dm 755 libevdev.so.2.3.0 "$pkgdir"/usr/arm-linux-gnueabihf
-    ln -s  /usr/arm-linux-gnueabihf/libevdev.so.2.3.0 /usr/arm-linux-gnueabihf/libevdev.so.2
+    install -Dm 755 libevdev.so.2.3.0 "$pkgdir"/usr/arm-linux-gnueabihf/lib
+    ln -s  /usr/arm-linux-gnueabihf/lib/libevdev.so.2.3.0 /usr/arm-linux-gnueabihf/lib/libevdev.so.2
+    mkdir /home/odroid/dreamcast-saves
+    chown odroid:odroid /home/odroid/dreamcast_saves
 }
