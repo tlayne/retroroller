@@ -16,6 +16,8 @@ depends=(
   python-urwid
   python-toml
   python-setuptools
+  python-humanize
+  python-cachetools
   neofetch
   conky
   bc
