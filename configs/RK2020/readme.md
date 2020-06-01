@@ -1,0 +1,1 @@
+Here you will find submitted configs files for RetroRoller on the RK2020 handheld. Please be advised this handheld is NOT supported by the author of RetroRoller, these files are provided for convience and your own experimentation only. 
