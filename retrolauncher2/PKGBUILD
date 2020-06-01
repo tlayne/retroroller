@@ -2,8 +2,8 @@
 
 _pkgname=retrolauncher
 pkgname=retrolauncher2
-pkgver=0.2.0
-pkgrel=3
+pkgver=0.3.0
+pkgrel=1
 pkgdesc="Low resource launcher2"
 arch=('any')
 url=https://github.com/valadaa48/retrolauncher2
