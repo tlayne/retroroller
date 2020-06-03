@@ -1,0 +1,24 @@
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+# The nmui binary is Copyright (C) 2020 OtherCrashOverride
+# https://github.com/OtherCrashOverride
+
+pkgname=nmui-odroidgo2
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="nmui by OtherCrashOverride"
+arch=('aarch64')
+url=https://github.com/OtherCrashOverride
+license=('Use on odroidgo2 advance')
+source=(
+  'nmui'
+  'nmui.sh'
+)
+install=nmui-odroidgo2.install
+md5sums=('09e8a606cbbc8a45ce2fcddceb556d11'
+         'c8b47f43e26f205c27e7dd76f354520a')
+
+package() {
+	install -Dm755 nmui -t "${pkgdir}"/usr/bin
+	install -Dm755 nmui.sh "${pkgdir}"/roms/sh/ConfigureNetwork.sh
+}

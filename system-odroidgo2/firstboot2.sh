@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+mkdir -p /home/odroid/.emulationstation/themes/
+mkdir -p /home/odroid/dreamcast_saves/
+chown -R odroid:odroid /roms
+chown -R odroid:odroid /home/odroid/dreamcast_saves/
+chmod -R 755 /roms
+chmod -R 755 /home/odroid/dreamcast_saves/
 ln -s /home/odroid/.emulationstation/themes/ /home/odroid/themes
 ln -s /home/odroid/.config/retroarch/bios /home/odroid/bios
 
@@ -58,6 +64,7 @@ mkdir -p /roms/dos/
 mkdir -p /roms/coleco/
 mkdir -p /roms/scummvm/
 mkdir -p /roms/c64/
+mkdir -p /roms/pokemini/
 chown -R odroid:odroid /roms
 chmod -R 755 /roms
 

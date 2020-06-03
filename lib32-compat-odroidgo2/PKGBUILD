@@ -1,8 +1,7 @@
 # Maintainer: valadaa48
-# vim: ft=sh:
 
 pkgname=lib32-compat-odroidgo2
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="armhf libs"
 arch=('aarch64')
@@ -10,16 +9,15 @@ license=('GPL')
 options=(!strip)
 
 prepare() {
-    cp -r ../libs ${srcdir}/
+  cp -r ../libs ${srcdir}/
 }
 
 package() {
-    cd ${srcdir}
-    mkdir -p ${pkgdir}/usr/arm-linux-gnueabihf/lib
-    cp -r libs/usr/arm-linux-gnueabihf/lib/* -t ${pkgdir}/usr/arm-linux-gnueabihf/lib/
-    install -Dm755 libs/usr/lib/ld-linux-armhf.so.3 -t ${pkgdir}/usr/lib
-    chmod -R 755 ${pkgdir}/*
+  mkdir -p ${pkgdir}/usr/arm-linux-gnueabihf/lib
+  cp -r libs/usr/arm-linux-gnueabihf/lib/* ${pkgdir}/usr/arm-linux-gnueabihf/lib/
+  install -Dm755 libs/usr/lib/ld-linux-armhf.so.3 -t ${pkgdir}/usr/lib
+  chmod -R 755 ${pkgdir}/*
 
-    install -dm755 ${pkgdir}/etc/ld.so.conf.d
-    echo "/usr/arm-linux-gnueabihf/lib" > ${pkgdir}/etc/ld.so.conf.d/00-lib32-compat.conf
+  install -dm755 ${pkgdir}/etc/ld.so.conf.d
+  echo "/usr/arm-linux-gnueabihf/lib" > ${pkgdir}/etc/ld.so.conf.d/00-lib32-compat.conf
 }

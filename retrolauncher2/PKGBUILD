@@ -2,8 +2,8 @@
 
 _pkgname=retrolauncher
 pkgname=retrolauncher2
-pkgver=0.1.1
-pkgrel=2
+pkgver=0.3.0
+pkgrel=1
 pkgdesc="Low resource launcher2"
 arch=('any')
 url=https://github.com/valadaa48/retrolauncher2
@@ -14,24 +14,31 @@ makedepends=(
 depends=(
   python-evdev
   python-urwid
-  python-humanize
   python-toml
-  python-cachetools
   python-setuptools
+  python-humanize
+  python-cachetools
   neofetch
+  conky
+  bc
 )
 source=(
   git+https://github.com/valadaa48/retrolauncher2
-  20-retrolauncher-uinput.rules
   retrolauncher.service
   RetroLauncher.sh
+  conky.conf
 )
 md5sums=('SKIP'
-         'b240977225748b85468cea092d464091'
          'a847a3ec11b91916cd723b26f194f0ec'
-         'b6bcd61a92035481bcbf102ce09c76fa')
+         'b6bcd61a92035481bcbf102ce09c76fa'
+         '656a038d6a3d7b2db01880d5792ab9e9')
 conflicts=(retrolauncher)
 provides=(retrolauncher)
+backup=(
+  home/odroid/.config/retrolauncher/retrolauncher.toml
+)
+
+install=retrolauncher2.install
 
 prepare() {
   cd ${pkgname}
@@ -44,10 +51,15 @@ package() {
   python setup.py install --prefix=/usr --root="${pkgdir}" --optimize=1
 
   cd "${srcdir}"
-  install -Dm 755 retrolauncher.service -t "${pkgdir}"/etc/systemd/system
+  install -Dm 755 retrolauncher.service -t "${pkgdir}"/usr/lib/systemd/system
   install -Dm 755 RetroLauncher.sh -t "$pkgdir"/roms/sh
-  install -Dm 644 20-retrolauncher-uinput.rules -t "$pkgdir"/etc/udev/rules.d
 
-  install -dm 755 "${pkgdir}"/usr/share/retrolauncher
-  install -Dm 644 ${pkgname}/retrolauncher/config/retrolauncher.toml -t "${pkgdir}"/usr/share/retrolauncher
+  install -dm 755 "${pkgdir}"/home/odroid/.config/retrolauncher/themes
+  install -Dm 644 "${pkgname}"/retrolauncher/config/retrolauncher.toml -t "${pkgdir}"/home/odroid/.config/retrolauncher
+  install -Dm 644 "${pkgname}"/retrolauncher/themes/default.toml -t "${pkgdir}"/home/odroid/.config/retrolauncher/themes
+
+  install -dm 755 "${pkgdir}"/etc/conky
+  install -m 644 conky.conf "${pkgdir}"/etc/conky
+
+  chown -R odroid:odroid "${pkgdir}"/home/odroid
 }

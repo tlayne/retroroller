@@ -1,7 +1,7 @@
 # Maintainer: valadaa48 <valadaa48@gmx.com>
 
 pkgname=bootini-odroidgo2
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="boot.ini for odroidgo2"
 arch=('aarch64')
@@ -12,4 +12,4 @@ source=('boot.ini')
 package() {
 	install -Dm644 boot.ini -t ${pkgdir}/boot
 }
-md5sums=('c746c1e574b1479e7adafee459f03389')
+md5sums=('32d9916bb10bb40950fae36cb6b584df')

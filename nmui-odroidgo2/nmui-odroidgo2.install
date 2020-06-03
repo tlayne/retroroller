@@ -1,0 +1,13 @@
+msg() {
+    echo "nmui is licensed for use on the odroidgo2 device"
+    echo ""
+    echo "The nmui binary is Copyright (C) 2020 OtherCrashOverride"
+}
+
+post_upgrade() {
+    msg
+}
+
+post_install() {
+    msg
+}

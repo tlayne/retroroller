@@ -5,7 +5,7 @@ pkgbase=linux-rr-odroid-go2
 _kernelname=${pkgbase#linux}
 _desc="ODROID-GO2 RR"
 pkgver=4.4.189
-pkgrel=1
+pkgrel=4
 arch=('aarch64')
 url="https://github.com/hardkernel/linux/tree/odroidgoA-4.4.y"
 license=('GPL2')
@@ -21,9 +21,10 @@ source=("git+https://github.com/valadaa48/linux#branch=RR"
         '5002_block-introduce-the-BFQ-v7r11-I-O-sched-for-4.7.patch1'
         '5003_block-bfq-add-Early-Queue-Merge-EQM-to-BFQ-v7r11-for-4.7.patch'
         '5004_blkck-bfq-turn-BFQ-v7r11-for-4.7.0-into-BFQ-v8r3-for-4.patch1'
+        'joypad.patch'
 )
 md5sums=('SKIP'
-         '32ba7d5966a9d8f42039fcd2e0239738'
+         '1751d6e5b2e7381aa26fc5f105730277'
          '86d4a35722b5410e3b29fc92dae15d4b'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'
          '3dc88030a8f2f5a5f97266d99b149f77'
@@ -31,7 +32,8 @@ md5sums=('SKIP'
          'f2c3aabfbb8319134fc2f041bf239b50'
          '275d66e9de98296d689a3b17871defaf'
          'ebc1b89f720c84709b772ec2bf68f014'
-         'eab7deb32438f884688723049de2e524')
+         'eab7deb32438f884688723049de2e524'
+         '43abb46ce1709bba4d9619885728ebc9')
 
 prepare() {
   cd "${srcdir}/linux"
@@ -49,6 +51,7 @@ prepare() {
   patch -p1 < ../5002_block-introduce-the-BFQ-v7r11-I-O-sched-for-4.7.patch1
   patch -p1 < ../5003_block-bfq-add-Early-Queue-Merge-EQM-to-BFQ-v7r11-for-4.7.patch
   patch -p1 < ../5004_blkck-bfq-turn-BFQ-v7r11-for-4.7.0-into-BFQ-v8r3-for-4.patch1
+  patch -p1 < ../joypad.patch
 }
 
 build() {
