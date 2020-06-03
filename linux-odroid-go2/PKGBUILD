@@ -8,7 +8,7 @@ _srcname=linux
 _kernelname=${pkgbase#linux}
 _desc="ODROID-GO2"
 pkgver=4.4.189
-pkgrel=11
+pkgrel=13
 arch=('aarch64')
 url="https://github.com/hardkernel/linux/tree/odroidgoA-4.4.y"
 license=('GPL2')
@@ -19,6 +19,7 @@ source=("git+https://github.com/hardkernel/linux#branch=odroidgoA-4.4.y"
         'linux.preset'
         '60-linux.hook'
         '90-linux.hook'
+        '91-linux.hook'
         'rga2_suspend.patch'
         'gcc9.patch'
         'joypad.patch')
@@ -27,6 +28,7 @@ md5sums=('SKIP'
          '86d4a35722b5410e3b29fc92dae15d4b'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'
          '3dc88030a8f2f5a5f97266d99b149f77'
+         'a4476a862fc5a7fcb1200fb71ab4f6fd'
          'e3999b9b7f122cf472946d98e85691bf'
          '9255af72ab91a15546c11bdbe45b1729'
          '43abb46ce1709bba4d9619885728ebc9')
@@ -139,6 +141,8 @@ _package() {
     install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/60-${pkgbase}.hook"
   sed "${_subst}" ../90-linux.hook |
     install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/90-${pkgbase}.hook"
+  sed "${_subst}" ../91-linux.hook |
+    install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/91-${pkgbase}.hook"
 }
 
 _package-headers() {
