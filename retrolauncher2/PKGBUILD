@@ -3,7 +3,7 @@
 _pkgname=retrolauncher
 pkgname=retrolauncher2
 pkgver=0.3.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Low resource launcher2"
 arch=('any')
 url=https://github.com/valadaa48/retrolauncher2
@@ -51,7 +51,7 @@ package() {
   python setup.py install --prefix=/usr --root="${pkgdir}" --optimize=1
 
   cd "${srcdir}"
-  install -Dm 755 retrolauncher.service -t "${pkgdir}"/usr/lib/systemd/system
+  install -Dm 644 retrolauncher.service -t "${pkgdir}"/usr/lib/systemd/system
   install -Dm 755 RetroLauncher.sh -t "$pkgdir"/roms/sh
 
   install -dm 755 "${pkgdir}"/home/odroid/.config/retrolauncher/themes
