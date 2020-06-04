@@ -8,11 +8,12 @@ _srcname=linux
 _kernelname=${pkgbase#linux}
 _desc="ODROID-GO2"
 pkgver=4.4.189
-pkgrel=13
+pkgrel=14
 arch=('aarch64')
 url="https://github.com/hardkernel/linux/tree/odroidgoA-4.4.y"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'uboot-tools' 'dtc')
+depends=('uboot-tools')
 options=('!strip')
 source=("git+https://github.com/hardkernel/linux#branch=odroidgoA-4.4.y"
         'config'
