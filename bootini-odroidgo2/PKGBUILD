@@ -2,7 +2,7 @@
 
 pkgname=bootini-odroidgo2
 pkgver=1.2.0
-pkgrel=1
+pkgrel=2
 pkgdesc="boot.ini for odroidgo2"
 arch=('aarch64')
 url=https://github.com/valadaa48
@@ -12,4 +12,4 @@ source=('boot.ini')
 package() {
 	install -Dm644 boot.ini -t ${pkgdir}/boot
 }
-md5sums=('32d9916bb10bb40950fae36cb6b584df')
+md5sums=('8a9ae8bf0a4aa9c3934e667d182a76c6')
