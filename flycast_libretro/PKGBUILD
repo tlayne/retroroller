@@ -2,7 +2,7 @@
 
 _pkgname=flycast
 pkgname=flycast_libretro
-pkgver=4142.dbf96863
+pkgver=4161.a423181d
 pkgrel=1
 pkgdesc="Multiplatform Sega Dreamcast emulator http://reicast.com"
 arch=('aarch64')
@@ -10,8 +10,8 @@ url="https://github.com/libretro/flycast"
 license=('GPL')
 makedepends=('git')
 source=(
-  'git+https://github.com/libretro/flycast'
-  #'git+https://github.com/valadaa48/flycast'
+  #'git+https://github.com/libretro/flycast'
+  'git+https://github.com/valadaa48/flycast'
   'target.patch'
 )
 md5sums=(
@@ -26,7 +26,7 @@ pkgver() {
 
 prepare() {
   cd ${_pkgname}
-  patch -p1 < ../target.patch
+#  patch -p1 < ../target.patch
 }
 
 build() {

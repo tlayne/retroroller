@@ -2,7 +2,7 @@
 
 _pkgname=dosbox-core
 pkgname=dosbox_core_libretro
-pkgver=4480.9a773c38
+pkgver=4487.254d3fc8
 pkgrel=1
 pkgdesc="Mirror of DOSBox-core. For downloads, PRs and bug reports, use realnc/dosbox-core"
 arch=('aarch64')
@@ -15,7 +15,7 @@ source=(
   'target.patch'
 )
 md5sums=('SKIP'
-         '616ad0c13b63114aa5240332d54c3c80')
+         '15c2e59baaf6a59075495ed95001a4ed')
 
 pkgver() {
   cd ${_pkgname}

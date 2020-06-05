@@ -2,8 +2,8 @@
 
 _pkgname=RetroArch
 pkgname=retroarch-odroidgo2
-pkgver=53640.6c4c93e17b
-pkgrel=6
+pkgver=54010.ff65c836c2
+pkgrel=1
 pkgdesc="Retroarch for odroidgo2"
 arch=('aarch64')
 url="https://github.com/libretro/RetroArch"
@@ -22,7 +22,7 @@ depends=(
   zlib
 )
 source=(
-  'git+https://github.com/libretro/RetroArch#commit=6c4c93e17b'
+  'git+https://github.com/libretro/RetroArch#commit=ff65c836c2979'
   'retroarch.cfg'
 )
 backup=('etc/retroarch.cfg')

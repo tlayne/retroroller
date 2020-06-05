@@ -2,7 +2,7 @@
 
 pkgname=oga-events
 pkgver=1.2.0
-pkgrel=1
+pkgrel=2
 pkgdesc="OGA global events"
 arch=('aarch64')
 url=https://github.com/valadaa48
@@ -18,5 +18,6 @@ install=oga-events.install
 
 package() {
 	install -Dm755 oga-events -t ${pkgdir}/usr/bin
-	install -Dm755 oga-events.service -t ${pkgdir}/usr/lib/systemd/system
+	install -d ${pkgdir}/usr/lib/systemd/system
+	install -Dm644 oga-events.service -t ${pkgdir}/usr/lib/systemd/system
 }
