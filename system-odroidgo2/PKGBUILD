@@ -2,7 +2,7 @@
 # vim: ft=sh:
 
 pkgname=system-odroidgo2
-pkgver=1.8.0
+pkgver=1.8.1
 pkgrel=1
 pkgdesc="Odroidgo2 system files"
 arch=('aarch64')
@@ -35,7 +35,7 @@ backup=(
 )
 install=system-odroidgo2.install
 md5sums=('462cd4e44563ebdca4ebf6130311aef8'
-         '0363fbada5893fbba62e76696f854908'
+         'a28ba1709db9a9c1e54f3de1bc0952d5'
          '2f0d3ab537798256e4fc6ccf938772dc'
          '772f37990a71ff5644ddbd9b8e4dbd7b'
          '2eff0e2f608fb8a2f6e25cf6a85239d9'
