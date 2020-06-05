@@ -1,8 +1,8 @@
 # Maintainer: valadaa48 <valadaa48@gmx.com>
 
 pkgname=oga-events
-pkgver=1.2.0
-pkgrel=2
+pkgver=1.3.0
+pkgrel=1
 pkgdesc="OGA global events"
 arch=('aarch64')
 url=https://github.com/valadaa48
@@ -12,7 +12,7 @@ source=(
     'oga-events'
     'oga-events.service'
 )
-md5sums=('5575476265277e41817029c7d0a15897'
+md5sums=('0bfe9008bcc5acb73ebe5402fb54e734'
          'ace29e4b39f3dc19825825c214110532')
 install=oga-events.install
 

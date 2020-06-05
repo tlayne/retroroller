@@ -39,9 +39,9 @@ async def handle_event(device):
         keys = joypad.active_keys()
         if event.code == e.KEY_POWER:
             if HOTKEY in keys:
-                runcmd("systemctl poweroff || true")
+                runcmd("sudo systemctl poweroff || true")
             else:
-                runcmd("systemctl suspend || true")
+                runcmd("sudo systemctl suspend || true")
         elif HOTKEY in keys:
             if event.code == e.BTN_DPAD_LEFT:
                 runcmd("amixer -q sset Playback 1%-")
