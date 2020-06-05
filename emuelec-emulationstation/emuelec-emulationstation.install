@@ -1,0 +1,6 @@
+post_upgrade() {
+    if [ ! -e /etc/systemd/system/multi-user.target.wants/emulationstation.service ]; then
+        systemctl disable emulationstation
+        systemctl enable emulationstation
+    fi
+}

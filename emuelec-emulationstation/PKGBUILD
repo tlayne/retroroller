@@ -3,7 +3,7 @@
 _pkgname=emulationstation
 pkgname=emuelec-emulationstation
 pkgver=3526.68b6b2ca
-pkgrel=2
+pkgrel=3
 pkgdesc="Emulation Station is a flexible emulator front-end supporting keyboardless navigation and custom system themes. EmuELEC edition."
 arch=(any)
 url="https://github.com/EmuELEC/emuelec-emulationstation"
@@ -22,6 +22,7 @@ depends=(
 makedepends=('cmake' 'curl' 'git')
 provides=(emulationstation)
 conflicts=(emulationstation)
+install=emuelec-emulationstation.install
 source=(
   "emulationstation::git+https://github.com/valadaa48/batocera-emulationstation#branch=rr"
   "git+https://github.com/valadaa48/EmuELEC#branch=rr"
@@ -63,7 +64,7 @@ package() {
   install -Dm644 "$_pkgname/LICENSE.md" "$pkgdir/usr/share/licenses/emuelec-emulationstation/LICENSE"
 
   install -Dm755 emulationstation.sh $pkgdir/usr/bin/emulationstation
-  install -Dm755 emulationstation.service "$pkgdir/etc/systemd/system/emulationstation.service"
+  install -Dm755 emulationstation.service -t "$pkgdir"/usr/lib/systemd/system
 
   install -d "$pkgdir"/home/odroid/.emulationstation
   cp -r EmuELEC/packages/sx05re/emuelec/config/emulationstation/scripts "$pkgdir"/home/odroid/.emulationstation/
