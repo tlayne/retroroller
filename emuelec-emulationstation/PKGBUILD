@@ -2,8 +2,8 @@
 
 _pkgname=emulationstation
 pkgname=emuelec-emulationstation
-pkgver=3526.68b6b2ca
-pkgrel=3
+pkgver=3528.399e9325
+pkgrel=1
 pkgdesc="Emulation Station is a flexible emulator front-end supporting keyboardless navigation and custom system themes. EmuELEC edition."
 arch=(any)
 url="https://github.com/EmuELEC/emuelec-emulationstation"
