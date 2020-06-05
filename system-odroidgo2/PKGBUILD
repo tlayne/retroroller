@@ -2,7 +2,7 @@
 # vim: ft=sh:
 
 pkgname=system-odroidgo2
-pkgver=1.3.2
+pkgver=1.8.0
 pkgrel=1
 pkgdesc="Odroidgo2 system files"
 arch=('aarch64')
@@ -13,8 +13,8 @@ source=(
   sleep
   firstboot.sh
   firstboot.service
-  firstboot2.sh
-  firstboot2.service
+  resize_root.sh
+  resize_root.service
   onboot.sh
   onboot.service
   performance
@@ -24,6 +24,8 @@ source=(
   zz_BackupConfig.sh
   zz_RestoreConfig.sh
   zz_ResetConfig.sh
+  zz_UpdateConfig.sh
+  rr-config
 )
 backup=(
   usr/lib/systemd/system-sleep/sleep
@@ -31,22 +33,25 @@ backup=(
   usr/local/sbin/onboot.sh
   etc/samba/smb.conf
 )
+install=system-odroidgo2.install
 md5sums=('462cd4e44563ebdca4ebf6130311aef8'
          '0363fbada5893fbba62e76696f854908'
          '2f0d3ab537798256e4fc6ccf938772dc'
-         'db8d26383a8bbfa19604e6b1c09bda3a'
-         '94149723729db59cd3971af1eabf3f04'
-         'b4cad54f326d1aef89d2f146566069d1'
-         '439fa94c8fcab8ddd10c95c77a913887'
-         '93cba8e45009b252ce4d59c5aa0b9a74'
-         'b28465279bd5b086ed424aa42ba813c9'
-         '82d80db732825e7cacb73c5af514a1ec'
+         '772f37990a71ff5644ddbd9b8e4dbd7b'
+         '2eff0e2f608fb8a2f6e25cf6a85239d9'
+         'f3556440ac04cb790d9f6ce61dd38761'
+         '5439c733adbfa0367c518d873c224ffa'
+         '02a6ea2729189737ba7427933e0b4945'
+         '3ed634a68f3c1af702a532668b5b7a78'
+         '4fd3b236a7997ee6975ed8545799f545'
          'b01abad415ad1e904e5ad2070f9c486a'
          'bd3d0ca803b3bd866c31e689f604b434'
          '3caef40123ef9ec20459cb68d6db48fd'
-         '9e71b5a58193e81955da54bc4043ebdd'
-         '1fbb3757f61148045848ee862cacb489'
-         '4244cc74c561db9cb0be14273664a149')
+         '64dff1f692f11c31802401ea0a9491ad'
+         '8e11505cbfe875ac6a45687604d68630'
+         '9710aa6b503e201b318c7fc2b0062b29'
+         '156777f5028a9af570964a8fceda1aac'
+         'b38ca0e4b4e8aad63165e5c781c54b46')
 
 package() {
   install -d "$pkgdir"/etc/polkit-1/rules.d
@@ -56,14 +61,14 @@ package() {
 
   install -Dm 755 sleep -t "$pkgdir"/usr/lib/systemd/system-sleep
 
-  install -Dm 755 firstboot.sh -t "$pkgdir"/usr/local/sbin/
-  install -Dm 644 firstboot.service -t "$pkgdir"/etc/systemd/system
+  install -Dm 755 resize_root.sh -t "$pkgdir"/usr/local/sbin/
+  install -Dm 644 resize_root.service -t "$pkgdir"/usr/lib/systemd/system
 
-  install -Dm 755 firstboot2.sh -t "$pkgdir"/usr/local/sbin/
-  install -Dm 644 firstboot2.service -t "$pkgdir"/etc/systemd/system
+  install -Dm 755 firstboot.sh -t "$pkgdir"/usr/local/sbin/
+  install -Dm 644 firstboot.service -t "$pkgdir"/usr/lib/systemd/system
 
   install -Dm 755 onboot.sh -t "$pkgdir"/usr/local/sbin/
-  install -Dm 644 onboot.service -t "$pkgdir"/etc/systemd/system
+  install -Dm 644 onboot.service -t "$pkgdir"/usr/lib/systemd/system
 
   install -Dm 755 performance -t "$pkgdir"/usr/bin
 
@@ -71,9 +76,12 @@ package() {
 
   install -Dm 644 smb.conf -t "$pkgdir"/etc/samba
 
+  install -Dm 755 rr-config -t "$pkgdir"/usr/bin
+
   install -Dm 755 zz_BackupConfig.sh -t "$pkgdir"/roms/sh
   install -Dm 755 zz_RestoreConfig.sh -t "$pkgdir"/roms/sh
   install -Dm 755 zz_ResetConfig.sh -t "$pkgdir"/roms/sh
+  install -Dm 755 zz_UpdateConfig.sh -t "$pkgdir"/roms/sh
 
   install -Dm 755 10-wheel -t "$pkgdir"/etc/sudoers.d
   chmod 750 "$pkgdir"/etc/sudoers.d

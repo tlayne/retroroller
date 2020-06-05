@@ -1,0 +1,17 @@
+[Unit]
+Description=Resize rootfs
+Before=local-fs-pre.target
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+TimeoutSec=infinity
+ExecStart=/usr/local/sbin/resize_root.sh
+StandardInput=tty-force
+StandardOutput=tty
+TTYVHangup=yes
+TTYPath=/dev/tty1
+TTYReset=yes
+
+[Install]
+RequiredBy=local-fs-pre.target

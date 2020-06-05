@@ -1,0 +1,11 @@
+post_upgrade() {
+    if [ ! -e /etc/systemd/system/multi-user.target.wants/onboot.service ]; then
+        systemctl disable onboot
+        systemctl enable onboot
+    fi
+
+    if [ ! -e /etc/systemd/system/network.target.wants/onboot.service ]; then
+        systemctl disable onboot
+        systemctl enable onboot
+    fi
+}

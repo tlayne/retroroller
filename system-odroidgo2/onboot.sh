@@ -1,17 +1,6 @@
 #!/usr/bin/env bash
 
-if [ -f /etc/wpa_supplicant/wpa_supplicant-wlan0.conf ]; then
-    rm /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
-fi
-
-if [ -f /boot/wpa_supplicant.conf ]; then
-	cp /boot/wpa_supplicant.conf /etc/wpa_supplicant/
-	chmod 644 /etc/wpa_supplicant/wpa_supplicant.conf
-fi
-
 /usr/bin/performance off
-
-iw dev wlan0 set power_save off
 
 echo 0 > /proc/sys/kernel/nmi_watchdog
 echo 1500 > /proc/sys/vm/dirty_writeback_centisecs
@@ -32,3 +21,5 @@ chgrp adm /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
 chmod 775 /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
 
 echo mmc0 > /sys/class/leds/blue:heartbeat/trigger
+
+exit 0

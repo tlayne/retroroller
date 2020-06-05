@@ -6,7 +6,7 @@ cpu=/sys/devices/system/cpu/cpufreq/policy0/scaling_governor
 
 dmc_default="dmc_ondemand"
 gpu_default="simple_ondemand"
-cpu_default="interactive"
+cpu_default="ondemand"
 performance="performance"
 
 case $1 in 

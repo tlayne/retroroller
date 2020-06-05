@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+backup() {
+	mkdir -p ~/backup/{retroarch,retroarch32,emulationstation,retrolauncher}
+
+	cp -v ~/.config/retroarch/*.cfg ~/backup/retroarch/
+	cp -v ~/.config/retroarch32/*.cfg ~/backup/retroarch32/
+	cp -v ~/.emulationstation/*.cfg ~/backup/emulationstation/
+	cp -v ~/.config/retrolauncher/* ~/backup/retrolauncher/
+}
+
+restore() {
+	cp -v ~/backup/retroarch/*.cfg ~/.config/retroarch/
+	cp -v ~/backup/retroarch32/*.cfg ~/.config/retroarch32/
+	cp -v ~/backup/emulationstation/*.cfg ~/.emulationstation/
+	cp -v ~/backup/retrolauncher/* ~/.config/retrolauncher/
+}
+
+reset() {
+	cp -v /etc/retroarch.cfg ~/.config/retroarch/
+	cp -v /etc/retroarch32.cfg ~/.config/retroarch32/
+	cp -v /usr/lib/python3.8/site-packages/retrolauncher/config/retrolauncher.toml ~/.config/retrolauncher/
+	cp -v /usr/lib/python3.8/site-packages/retrolauncher/themes/default.toml ~/.config/retrolauncher/
+}
+
+update() {
+	# fetch from the internet
+	echo "not implemented"
+}
+
+case $1 in
+	backup)
+		backup
+		;;
+	restore)
+		restore
+		;;
+	reset)
+		reset
+		;;
+	update)
+		update
+		;;
+	*)
+		echo "Usage: rr-config backup|restore|reset|update"
+		exit 1
+		;;
+esac
+

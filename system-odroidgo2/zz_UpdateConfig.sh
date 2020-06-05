@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-rr-config restore
+rr-config update
