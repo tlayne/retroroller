@@ -2,5 +2,5 @@
 
 performance on
 cd ~/drastic/
-/opt/drastic/drastic
+drastic
 performance off
