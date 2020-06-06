@@ -8,7 +8,7 @@ to contribute to.
 
 If you have limited Linux knowledge or are expecting a no-fuss gaming experience
 then you may consider using another image more geared towards non-technical
-users such as EmuELEC, TheRA, Batocera or OGSTA. They are all great images.
+users such as EmuELEC or TheRA.
 
 
 ## Installation
