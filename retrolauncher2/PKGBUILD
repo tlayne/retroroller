@@ -21,6 +21,7 @@ depends=(
   neofetch
   conky
   bc
+  nmui-odroidgo2
 )
 source=(
   git+https://github.com/valadaa48/retrolauncher2
