@@ -2,5 +2,5 @@
 
 performance on
 cd ~/drastic/
-drastic
+./drastic
 performance off
