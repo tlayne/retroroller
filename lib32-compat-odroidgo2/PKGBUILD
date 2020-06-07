@@ -1,7 +1,7 @@
 # Maintainer: valadaa48
 
 pkgname=lib32-compat-odroidgo2
-pkgver=1.4.0
+pkgver=1.5.0
 pkgrel=1
 pkgdesc="armhf libs"
 arch=('aarch64')
@@ -15,15 +15,10 @@ prepare() {
 
 package() {
   mkdir -p ${pkgdir}/usr/lib/arm-linux-gnueabihf
-  cp -r libs/usr/lib/arm-linux-gnueabihf/* ${pkgdir}/usr/lib/arm-linux-gnueabihf/
+  rsync -a libs/usr/lib/arm-linux-gnueabihf/* ${pkgdir}/usr/lib/arm-linux-gnueabihf/
   install -Dm755 libs/usr/lib/ld-linux-armhf.so.3 -t ${pkgdir}/usr/lib
   chmod -R 755 ${pkgdir}/*
 
-  cd ${pkgdir}/usr/lib/arm-linux-gnueabihf/
-
-  rm libSDL2-2.0.so.0
-  cp libSDL2-2.0.so.0.9.0 libSDL2-2.0.so.0
-   
   install -dm755 ${pkgdir}/etc/ld.so.conf.d
   echo "/usr/lib/arm-linux-gnueabihf" > ${pkgdir}/etc/ld.so.conf.d/00-lib32-compat.conf
 }
