@@ -1,6 +1,6 @@
 ##/bin/bash
 cd ~
-wget -O ~/drastic.tar.gz https://raw.githubusercontent.com/shantigilbert/binaries/master/odroid-xu4/drastic.tar.gz
+wget -O ~/drastic.tar.gz https://github.com/Retro-Arena/binaries/raw/master/odroid-n2/drastic.tar.gz
 tar xvf ~/drastic.tar.gz 
 rm ~/drastic.tar.gz
 mkdir ~/drastic/config/
