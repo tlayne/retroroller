@@ -155,7 +155,7 @@ path = "/roms/fds"
 [[context_menu]]
 name = "snes-cd"
 cmd = "performance on; retroarch -L ~/.config/retroarch/cores/snes9x_libretro.so {path}; performance off"
-path = "/roms/snes_msu1"
+path = "/roms/snesmsu1"
 
 [[context_menu]]
 name = "snes"
