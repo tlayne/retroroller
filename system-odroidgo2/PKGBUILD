@@ -78,6 +78,7 @@ package() {
 
   install -Dm 755 rr-config -t "$pkgdir"/usr/bin
 
+  install -Dm 755 SystemUpdate.sh -t "$pkgdir"/roms/sh
   install -Dm 755 zz_BackupConfig.sh -t "$pkgdir"/roms/sh
   install -Dm 755 zz_RestoreConfig.sh -t "$pkgdir"/roms/sh
   install -Dm 755 zz_ResetConfig.sh -t "$pkgdir"/roms/sh

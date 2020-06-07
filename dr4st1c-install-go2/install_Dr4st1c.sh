@@ -6,8 +6,8 @@ rm ~/drastic.tar.gz
 mkdir ~/drastic/config/
 cd ~/drastic/config/
 if [ "cat /sys/devices/platform/odroidgo2-joypad/input/input2/name" = "odroidgo2_joypad_v11" ]; then
-    wget -O config.cfg https://raw.githubusercontent.com/valadaa48/retroroller/master/configs/OGA_V11/drastic.cfg
+    wget -O drastic.cfg https://raw.githubusercontent.com/valadaa48/retroroller/master/configs/OGA_V11/drastic.cfg
 else 
-    wget -O config.cfg https://raw.githubusercontent.com/valadaa48/retroroller/master/configs/OGA_V1/drastic.cfg
+    wget -O drastic.cfg https://raw.githubusercontent.com/valadaa48/retroroller/master/configs/OGA_V1/drastic.cfg
 fi
-wget -O config.cf2 https://raw.githubusercontent.com/valadaa48/retroroller/master/configs/OGA_V1/drastic.cf2
+wget -O drastic.cf2 https://raw.githubusercontent.com/valadaa48/retroroller/master/configs/OGA_V1/drastic.cf2
