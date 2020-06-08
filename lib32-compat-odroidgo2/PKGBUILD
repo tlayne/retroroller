@@ -2,7 +2,7 @@
 
 pkgname=lib32-compat-odroidgo2
 pkgver=1.5.0
-pkgrel=1
+pkgrel=2
 pkgdesc="armhf libs"
 arch=('aarch64')
 license=('GPL')
