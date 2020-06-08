@@ -1,4 +1,11 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-cd /opt/emulationstation
-./emulationstation
+while true; do
+    rm -f /tmp/es-restart
+    cd /opt/emulationstation
+    ./emulationstation "$@"
+    ret=$?
+    [ -f /tmp/es-restart ] && continue
+    break
+done
+exit $ret
