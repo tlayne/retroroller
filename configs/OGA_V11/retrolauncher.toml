@@ -32,7 +32,7 @@ cmd = "performance on; ppsspp; performance off"
 
 [[apps]]
 name = "Dr4st1c"
-cmd = "performance on; ~/drastic/drastic; performance off"
+cmd = "/usr/bin/drastic/drastic.sh"
 
 [[apps]]
 name = "\n:: System Utils ::\n"
@@ -155,7 +155,7 @@ path = "/roms/fds"
 [[context_menu]]
 name = "snes-cd"
 cmd = "performance on; retroarch -L ~/.config/retroarch/cores/snes9x_libretro.so {path}; performance off"
-path = "/roms/snes_msu1"
+path = "/roms/snesmsu1"
 
 [[context_menu]]
 name = "snes"
