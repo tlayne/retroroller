@@ -10,6 +10,8 @@ options=(!strip)
 source=(logo.bmp)
 sha512sums=(SKIP)
 
+conflicts('retroroller-clean-boot-logo')
+
 package() {
     install -Dm644 logo.bmp -t ${pkgdir}/boot
 }
