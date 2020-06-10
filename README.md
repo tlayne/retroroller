@@ -41,6 +41,7 @@ my kernel package after he's acquired an OGA himself for testing.
 ## Credits
 
 - npaladin2000 for development
+- Slaminger for development and testing help
 - NOirBRight for testing and feedback
 - M00D\_Sanchez for the artwork
 - Christian\_Haitian for debugging wifi issues
