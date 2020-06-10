@@ -3,7 +3,7 @@
 pkgname=retroroller-clean-boot-logo
 pkgver=1.0.0
 pkgrel=1
-pkgdesc="Retroroller Clean boot logo by npaladin2000 and M00D_sanchez"
+pkgdesc="Retroroller Clean boot logo by npaladin2000 and M00D_Sanchez"
 arch=('aarch64')
 license=('GPL')
 options=(!strip)
