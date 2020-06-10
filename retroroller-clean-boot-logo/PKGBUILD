@@ -1,4 +1,4 @@
-enc# Maintainer: valadaa48 and npaladin2000
+# Maintainer: npaladin2000
 
 pkgname=retroroller-clean-boot-logo
 pkgver=1.0.0
@@ -9,6 +9,7 @@ license=('GPL')
 options=(!strip)
 source=(logo.bmp)
 sha512sums=(SKIP)
+conflicts('retroroller-boot-logo')
 
 package() {
     install -Dm644 logo.bmp -t ${pkgdir}/boot
