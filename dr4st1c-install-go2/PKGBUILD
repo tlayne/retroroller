@@ -1,7 +1,7 @@
 # Maintainer: npaladin2000
 
 pkgname=dr4st1c-install-go2
-pkgver=1.0.0
+pkgver=1.1.0
 pkgrel=4
 pkgdesc='A DS emulator installer for Linux'
 arch=(x86_64 aarch64)
@@ -13,13 +13,38 @@ depends=(
   zlib
 )
 source=(
-  install_Dr4st1c.sh
+  drastic
+  drastic.cf2
+  drastic.cfg
   drastic.sh
+  drastic_bios_arm7.bin
+  drastic_bios_arm9.bin
+  drastic_logo_0.raw
+  drastic_logo_1.raw
+  drastic_readme.txt
+  game_database.xml
+  usrcheat.dat  
 )
-md5sums=('79c8fe3c4d60e52f7a1e06836646ef49'
-         '27ff8d254bc33e94294e13ef82d1d2c3')
+
 
 package() {
-    install -Dm 755 install_Dr4st1c.sh -t "$pkgdir"/roms/sh
-    install -Dm 755 drastic.sh "$pkgdir"/usr/bin/drastic
+    mkdir /home/odroid/drastic/
+    mkdir /homeodroid/drastic/config
+    mkdir /home/odroid/drastic/system
+    
+    install -Dm 755 drastic_bios_arm7.bin "$pkgdir"~/drastic/system/
+    install -Dm 755 drastic_bios_arm9.bin "$pkgdir"~/drastic/system/
+    
+    install -Dm 755 drastic_logo_0.raw "$pkgdir"~/drastic/
+    install -Dm 755 drastic_logo_1.raw "$pkgdir"~/drastic/
+    install -Dm 755 drastic_readme.txt "$pkgdir"~/drastic/
+    install -Dm 755 game_database.xml "$pkgdir"~/drastic/
+    install -Dm 755 usrcheat.dat "$pkgdir"~/drastic/
+    install -Dm 755 drastic "$pkgdir"~/drastic/
+
+    install -Dm 755 drastic.cfg "$pkgdir"~/drastic/config/
+    install -Dm 755 drastic.cf2 "$pkgdir"~/drastic/config/
+    install -Dm 755 drastic.sh "$pkgdir"/usr/bin/drastic/
+    
+    chown -R odroid:odroid /home/odroid/drastic
 }
