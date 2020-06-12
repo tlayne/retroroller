@@ -1,0 +1,22 @@
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+pkgname=ogage
+pkgver=0.1.0
+pkgrel=2
+pkgdesc="ogage"
+arch=('aarch64')
+url=https://github.com/valadaa48
+license=('GLPL2')
+depends=(python-evdev light)
+source=(
+    'ogage'
+    'ogage.service'
+)
+md5sums=('ce0eab5db1a3fb3e0a8168752c07b31a'
+         '24363699bd8c29c8e81eb0a3e9f07978')
+
+package() {
+	install -Dm755 ogage -t ${pkgdir}/usr/bin
+	install -d ${pkgdir}/usr/lib/systemd/system
+	install -Dm644 ogage.service -t ${pkgdir}/usr/lib/systemd/system
+}

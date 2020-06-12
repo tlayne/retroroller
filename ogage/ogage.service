@@ -1,0 +1,9 @@
+[Unit]
+Description=ogage
+
+[Service]
+ExecStart=/usr/bin/ogage
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
