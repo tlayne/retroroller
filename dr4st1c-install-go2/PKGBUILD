@@ -2,7 +2,7 @@
 
 pkgname=dr4st1c-install-go2
 pkgver=1.1.0
-pkgrel=4
+pkgrel=5
 pkgdesc='A DS emulator installer for Linux'
 arch=(x86_64 aarch64)
 url=https://www.drastic-ds.com/
@@ -40,7 +40,7 @@ package() {
 
     install -Dm 644 drastic.cfg "$pkgdir"/home/odroid/drastic/config
     install -Dm 644 drastic.cf2 "$pkgdir"/home/odroid/drastic/config
-    install -Dm 755 drastic.sh "$pkgdir"/usr/bin/drastic
+    install -Dm 755 drastic.sh "$pkgdir"/usr/bin
     
     chown -R odroid:odroid "$pkgdir"/home/odroid/drastic
 }
