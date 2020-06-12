@@ -28,23 +28,30 @@ source=(
 
 
 package() {
-    mkdir /home/odroid/drastic/
-    mkdir /homeodroid/drastic/config
-    mkdir /home/odroid/drastic/system
+    install -Dm 644 drastic_bios_arm7.bin "$pkgdir"/home/odroid/drastic/system
+    install -Dm 644 drastic_bios_arm9.bin "$pkgdir"/home/odroid/drastic/system
     
-    install -Dm 755 drastic_bios_arm7.bin "$pkgdir"~/drastic/system/
-    install -Dm 755 drastic_bios_arm9.bin "$pkgdir"~/drastic/system/
-    
-    install -Dm 755 drastic_logo_0.raw "$pkgdir"~/drastic/
-    install -Dm 755 drastic_logo_1.raw "$pkgdir"~/drastic/
-    install -Dm 755 drastic_readme.txt "$pkgdir"~/drastic/
-    install -Dm 755 game_database.xml "$pkgdir"~/drastic/
-    install -Dm 755 usrcheat.dat "$pkgdir"~/drastic/
-    install -Dm 755 drastic "$pkgdir"~/drastic/
+    install -Dm 644 drastic_logo_0.raw "$pkgdir"/home/odroid/drastic
+    install -Dm 644 drastic_logo_1.raw "$pkgdir"/home/odroid/drastic
+    install -Dm 644 drastic_readme.txt "$pkgdir"/home/odroid/drastic
+    install -Dm 644 game_database.xml "$pkgdir"/home/odroid/drastic
+    install -Dm 644 usrcheat.dat "$pkgdir"/home/odroid/drastic
+    install -Dm 755 drastic "$pkgdir"/home/odroid/drastic
 
-    install -Dm 755 drastic.cfg "$pkgdir"~/drastic/config/
-    install -Dm 755 drastic.cf2 "$pkgdir"~/drastic/config/
-    install -Dm 755 drastic.sh "$pkgdir"/usr/bin/drastic/
+    install -Dm 644 drastic.cfg "$pkgdir"/home/odroid/drastic/config
+    install -Dm 644 drastic.cf2 "$pkgdir"/home/odroid/drastic/config
+    install -Dm 755 drastic.sh "$pkgdir"/usr/bin/drastic
     
-    chown -R odroid:odroid /home/odroid/drastic
+    chown -R odroid:odroid "$pkgdir"/home/odroid/drastic
 }
+md5sums=('4e725f321648c552587fcef00767897a'
+         '29ca90a4c02f0117cc4fa23676777597'
+         '4a97393a0e740c2959714fe255341ff7'
+         '93059a9165d715b9d843bdf479f45ec9'
+         'c259d5dd2d1a8e1f58eaa26c08efae45'
+         '5f34f9f6108f8d57fc26789b7a7ecf82'
+         '4986e446825453695d2e0b22dca6affe'
+         'f590deaba5027125ff1fcfd8f0922503'
+         'd6e39427a0ec455ac201d2882e1aa99d'
+         '569c8eddd1d5a0b51a5c7105cfd65cd7'
+         'bae4cb62265d0212911e1c6fcd23de78')

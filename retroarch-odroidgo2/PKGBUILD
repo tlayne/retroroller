@@ -1,8 +1,10 @@
 # Maintainer: valadaa48
 
+epoch=1
+
 _pkgname=RetroArch
 pkgname=retroarch-odroidgo2
-pkgver=54010.ff65c836c2
+pkgver=54240.3abcb2b922
 pkgrel=1
 pkgdesc="Retroarch for odroidgo2"
 arch=('aarch64')
@@ -22,12 +24,14 @@ depends=(
   zlib
 )
 source=(
-  'git+https://github.com/libretro/RetroArch#commit=ff65c836c2979'
+  'git+https://github.com/valadaa48/RetroArch#branch=oga_gfx_ffwd'
+  #'git+https://github.com/libretro/RetroArch#commit=5a690b7ac871'
   'retroarch.cfg'
 )
 backup=('etc/retroarch.cfg')
 md5sums=('SKIP'
          'ba2da9cd6b6fc81c75b6d9a1a4bf65f5')
+options=(!strip)
 
 pkgver() {
   cd "$_pkgname"
@@ -40,7 +44,8 @@ prepare() {
 }
 
 build() {
-  export CXXFLAGS="$CXXFLAGS -fno-rtti -std=gnu++11"
+  export CXXFLAGS="$CXXFLAGS -fno-rtti -std=gnu++11 -g"
+  export CFLAGS="$CFLAGS -g"
 
   cd "$_pkgname"
   ./configure \
