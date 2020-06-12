@@ -72,10 +72,6 @@ name = "Autostart Emulation Station"
 cmd = "sudo systemctl disable retrolauncher; sudo systemctl enable emulationstation"
 term = true
 
-[[apps]]
-name = "Install Dr4st1c"
-cmd = "/roms/sh/install_Dr4st1c.sh"
-
 # Begin Systems Config
 [[context_menu]]
 name = "PPSSPP"

@@ -41,12 +41,13 @@ my kernel package after he's acquired an OGA himself for testing.
 ## Credits
 
 - npaladin2000 for development
+- Slaminger for development and testing help
 - NOirBRight for testing and feedback
-- M00D\_Sanchez for the artwork
+- M00D\_Sanchez and tshroom for the artwork
 - Christian\_Haitian for debugging wifi issues
 - Safarikniv for testing and hosting the RetroArch cores
-- CrashOverride for all the dev work he's done on the platform
-- Lakka and EmuELEC team for all the collaboration
+- CrashOverride and the HardKernel team for all the dev work he's done on the platform
+- The Lakka and EmuELEC teams for all the collaboration
 - All the fans in #oga-all-versions including BadBrent
 
 [//]: # vim: set textwidth=80:
