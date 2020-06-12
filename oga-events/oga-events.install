@@ -1,4 +1,0 @@
-post_upgrade() {
-    systemctl disable oga-events
-    systemctl enable oga-events
-}
