@@ -2,14 +2,16 @@
 
 case $1 in
    pre)
-	# workaround until dwc2 is fixed
-	alsactl store -f /var/local/asound.state
-	modprobe -r dwc2
-	;;
+        # workaround until dwc2 is fixed
+        alsactl store -f /var/local/asound.state
+        modprobe -r dwc2
+        modprobe -r esp8089
+        ;;
    post)
-	modprobe -r dwc2
-	modprobe -i dwc2
-	alsactl restore -f /var/local/asound.state
-	;;
+        modprobe -r dwc2
+        modprobe -r esp8089
+        modprobe -i dwc2
+        modprobe -i esp8089
+        alsactl restore -f /var/local/asound.state
+        ;;
 esac
-

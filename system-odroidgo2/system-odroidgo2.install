@@ -8,4 +8,9 @@ post_upgrade() {
         systemctl disable onboot
         systemctl enable onboot
     fi
+
+    if [ -f /etc/systemd/system/multi-user.target.wants/network-setup.service ]; then
+        systemctl disable network-setup
+        systemctl enable --no-block network-setup
+    fi
 }
