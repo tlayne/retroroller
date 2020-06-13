@@ -1,0 +1,34 @@
+# Maintainer: valadaa48 <valadaa48@gmx.com>
+
+pkgname=spring-libretro
+pkgver=1.3b30e90
+pkgrel=1
+pkgdesc="Spring libretro launcher"
+arch=('aarch64')
+url="https://github.com/valadaa48/spring-libretro"
+license=('MIT')
+makedepends=('git')
+options=(!buildflags)
+source=(
+  'git+https://github.com/valadaa48/spring-libretro'
+  'spring_ppsspp_libretro.info'
+)
+md5sums=('SKIP'
+         '5418e875d05d879f8500aeab28b6e188')
+
+pkgver() {
+  cd "$pkgname"
+  echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd "$pkgname"
+  make
+}
+
+package() {
+  install -Dm755 "$pkgname"/spring_libretro.so "$pkgdir"/home/odroid/.config/retroarch/cores/spring_ppsspp_libretro.so
+  install -Dm644 spring_ppsspp_libretro.info -t "$pkgdir"/home/odroid/.config/retroarch/cores
+  chown -R odroid:odroid "$pkgdir"/home/odroid/.config/retroarch/cores
+}
+
