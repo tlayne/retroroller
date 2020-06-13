@@ -338,3 +338,8 @@ term = true
 name = "Run"
 cmd = "{path}"
 
+[[context_menu]]
+name = "Delete"
+cmd = "rm -f {path}"
+term="true"
+path = "/roms"
