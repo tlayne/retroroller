@@ -47,6 +47,7 @@ name = "System Update"
 cmd = "sudo pacman -Syu --noconfirm"
 term = true
 
+# untested
 #[[apps]]
 #name = "Install package(s) from USB"
 #cmd = "sudo mount /dev/sda1 /mnt && sudo pacman -U --noconfirm /mnt/pkg/*.xz; sudo umount /dev/sda1"
@@ -61,6 +62,10 @@ term = true
 name = "neofetch"
 cmd = "neofetch --ascii_distro Arch_small"
 term = true
+
+[[apps]]
+name = "Network Setup (nmui)"
+cmd = "/roms/sh/ConfigureNetwork.sh"
 
 [[apps]]
 name = "Autostart RetroLauncher"
@@ -338,3 +343,4 @@ term = true
 name = "Run"
 cmd = "{path}"
 
+kkkk
