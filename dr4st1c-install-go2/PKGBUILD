@@ -2,7 +2,7 @@
 
 pkgname=dr4st1c-install-go2
 pkgver=1.1.0
-pkgrel=5
+pkgrel=7
 pkgdesc='A DS emulator installer for Linux'
 arch=(x86_64 aarch64)
 url=https://www.drastic-ds.com/
@@ -28,19 +28,19 @@ source=(
 
 
 package() {
-    install -Dm 644 drastic_bios_arm7.bin "$pkgdir"/home/odroid/drastic/system
-    install -Dm 644 drastic_bios_arm9.bin "$pkgdir"/home/odroid/drastic/system
+    install -Dm 644 drastic_bios_arm7.bin -t "$pkgdir"/home/odroid/drastic/system
+    install -Dm 644 drastic_bios_arm9.bin -t "$pkgdir"/home/odroid/drastic/system
     
-    install -Dm 644 drastic_logo_0.raw "$pkgdir"/home/odroid/drastic
-    install -Dm 644 drastic_logo_1.raw "$pkgdir"/home/odroid/drastic
-    install -Dm 644 drastic_readme.txt "$pkgdir"/home/odroid/drastic
-    install -Dm 644 game_database.xml "$pkgdir"/home/odroid/drastic
-    install -Dm 644 usrcheat.dat "$pkgdir"/home/odroid/drastic
-    install -Dm 755 drastic "$pkgdir"/home/odroid/drastic
+    install -Dm 644 drastic_logo_0.raw -t "$pkgdir"/home/odroid/drastic
+    install -Dm 644 drastic_logo_1.raw -t "$pkgdir"/home/odroid/drastic
+    install -Dm 644 drastic_readme.txt -t "$pkgdir"/home/odroid/drastic
+    install -Dm 644 game_database.xml -t "$pkgdir"/home/odroid/drastic
+    install -Dm 644 usrcheat.dat -t "$pkgdir"/home/odroid/drastic
+    install -Dm 755 drastic -t "$pkgdir"/home/odroid/drastic
 
-    install -Dm 644 drastic.cfg "$pkgdir"/home/odroid/drastic/config
-    install -Dm 644 drastic.cf2 "$pkgdir"/home/odroid/drastic/config
-    install -Dm 755 drastic.sh "$pkgdir"/usr/bin
+    install -Dm 644 drastic.cfg -t "$pkgdir"/home/odroid/drastic/config
+    install -Dm 644 drastic.cf2 -t "$pkgdir"/home/odroid/drastic/config
+    install -Dm 755 drastic.sh "$pkgdir"/usr/bin/drastic
     
     chown -R odroid:odroid "$pkgdir"/home/odroid/drastic
 }
