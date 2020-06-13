@@ -37,7 +37,6 @@ cmd = "/usr/bin/drastic/drastic.sh"
 [[apps]]
 name = "\n:: System Utils ::\n"
 
-# broken on v11
 [[apps]]
 name = "Dingux Commander"
 cmd = "dinguxcommander"
