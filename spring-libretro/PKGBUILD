@@ -2,7 +2,7 @@
 
 pkgname=spring-libretro
 pkgver=1.3b30e90
-pkgrel=1
+pkgrel=4
 pkgdesc="Spring libretro launcher"
 arch=('aarch64')
 url="https://github.com/valadaa48/spring-libretro"
@@ -11,10 +11,19 @@ makedepends=('git')
 options=(!buildflags)
 source=(
   'git+https://github.com/valadaa48/spring-libretro'
-  'spring_ppsspp_libretro.info'
+  spring_drastic_libretro.info
+  spring_mupen_libretro.info
+  spring_ppsspp_libretro.info
+  spring_ra32_pcsx_libretro.info
+  spring_sh_libretro.info
 )
 md5sums=('SKIP'
-         '5418e875d05d879f8500aeab28b6e188')
+         'a3d9a2637c924729f419ee8a09903081'
+         '9960320e9af036635ff34da5e2b51838'
+         '5418e875d05d879f8500aeab28b6e188'
+         '597fe366e0319f6343fc51c2db55ca45'
+         '6ab83d14ca470b49561903707018d789')
+
 
 pkgver() {
   cd "$pkgname"
@@ -27,8 +36,10 @@ build() {
 }
 
 package() {
-  install -Dm755 "$pkgname"/spring_libretro.so "$pkgdir"/home/odroid/.config/retroarch/cores/spring_ppsspp_libretro.so
-  install -Dm644 spring_ppsspp_libretro.info -t "$pkgdir"/home/odroid/.config/retroarch/cores
+  for x in drastic mupen ppsspp ra32_pcsx sh; do
+    install -Dm755 "$pkgname"/spring_libretro.so "$pkgdir"/home/odroid/.config/retroarch/cores/spring_${x}_libretro.so
+    install -Dm644 spring_${x}_libretro.info -t "$pkgdir"/home/odroid/.config/retroarch/cores
+  done
   chown -R odroid:odroid "$pkgdir"/home/odroid/.config/retroarch/cores
 }
 
