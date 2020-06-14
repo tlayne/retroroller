@@ -10,18 +10,10 @@ If you have limited Linux knowledge or are expecting a no-fuss gaming experience
 then you may consider using another image more geared towards non-technical
 users such as EmuELEC or TheRA.
 
-
-## Installation
-
-1. Download [Coming
-   Soon](http://mega.nz/file/nwl2jCKa#UgTv3E4Bb2VgGqaHg5KA6FIR1Zd3BMu4NCrWX4MYUHA)
-2. Flash to sdcard.
-3. On partition 1 (fat32) edit `network.sh` or use the builtin network config.
-4. Boot in OGA and wait for Retro Launcher.
-
 NOTE: It's highly recommended that you can and are comfortable with ssh'ing in
-or using a USB keyboard in case you get stuck.
+or using a USB keyboard in case you get stuck using this OS.
 
+See the [Installation page](https://github.com/valadaa48/retroroller/wiki/Installation) on our [Wiki](https://github.com/valadaa48/retroroller/wiki) to get started using RetroRoller. 
 
 ### Obligatory Disclaimer
 
