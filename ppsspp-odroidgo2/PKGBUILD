@@ -1,0 +1,80 @@
+# Maintainer: valadaa48
+
+pkgname=ppsspp-odroidgo2
+pkgver=27224.414b0e00e
+pkgrel=1
+pkgdesc='A PSP emulator written in C++'
+arch=(x86_64 aarch64)
+url=http://www.ppsspp.org/
+license=(GPL2)
+provides=(ppsspp)
+conflicts=(ppsspp)
+depends=(
+  glibc
+  sdl2
+  zlib
+  libgo2
+  ffmpeg
+  libzip
+)
+makedepends=(
+  cmake
+  git
+  libzip
+  python
+)
+source=(
+  ppsspp-odroidgo2::git+https://github.com/hrydgard/ppsspp
+  ppsspp.sh
+  odroidgo2.patch
+)
+sha256sums=('SKIP'
+            '3b6de852da4a41157f1600d6dac1c23dd6bf5e0342ef20aeffd7bf90d13717f2'
+            '2882421fb8e90e8783459edea557c0ddeb8d58f320396b61b5230d17f24ec8e3')
+
+pkgver() {
+    cd ${pkgname}
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  cd ${pkgname}
+  rm -rf build
+  mkdir build
+
+  rm -rf ffmpeg 
+#  git submodule deinit -f ffmpeg
+  git submodule update --init --recursive
+
+  sed -i 's:drm/drm:libdrm/drm:' SDL/SDLMain.cpp
+  
+  patch -p1 < ../odroidgo2.patch
+}
+
+build() {
+  cd ${pkgname}/build
+
+  cmake .. \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DUSING_FBDEV=ON \
+    -DUSING_EGL=ON \
+    -DUSING_GLES2=ON \
+    -DUSE_SYSTEM_LIBZIP=ON \
+    -DUSE_SYSTEM_FFMPEG=ON \
+    -DUSING_X11_VULKAN=OFF \
+    -DUSE_DISCORD=OFF
+
+  make VERBOSE=1
+}
+
+package() {
+  cd ${pkgname}/build
+
+  install -dm 755 "${pkgdir}"/{opt/ppsspp,/usr/bin}
+  install -m 755 PPSSPPSDL -t "${pkgdir}"/opt/ppsspp/
+  cp -dr --no-preserve=ownership assets "${pkgdir}"/opt/ppsspp/
+  install -m755 ../../ppsspp.sh "${pkgdir}"/usr/bin/ppsspp
+}
+
+# vim: ts=2 sw=2 et:
